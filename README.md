@@ -6,7 +6,7 @@
 
   - __Product Owner__: Heny Han
   - __Scrum Master__: Eric Dai
-  - __Development Team Members__: Joe Jun, Julio Fils
+  - __Development Team Members__: Joe Jun, Julio Fils, Eric Dai, Henry Han
 
 ## Table of Contents
 
