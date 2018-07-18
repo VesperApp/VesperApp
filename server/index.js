@@ -1,8 +1,8 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var { drink, ingredient }  = require('../database/index');
+const express = require('express');
+const bodyParser = require('body-parser');
+const drink  = require('../database/drink.js');
 
-var app = express();
+let app = express();
 
 app.use(bodyParser.json());
 
