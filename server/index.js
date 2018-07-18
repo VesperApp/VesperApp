@@ -26,7 +26,7 @@ app.post('/drinks/migrate', (req, res) => {
     if (err) {
       res.status(500).send("POST /migrate failed");
     } else {
-      res.status(201).send(`migrate ${drinks.length} drinks successfully`);
+      res.status(201).send(`migrate drinks successfully`);
     }
   });
 });
@@ -37,11 +37,11 @@ app.post('/drinks', (req, res) => {});
 
 // POST: migrate data from ingredient.js into mongodb
 app.post('/ingredients/migrate', (req, res) => {
-  drink.migrate((err, ingredients) => {
+  ingredient.migrate((err, ingredients) => {
     if (err) {
       res.status(500).send(`POST /migrate failed, ${err}`);
     } else {
-      res.status(201).send(`migrate ${ingredients.length} ingredients successfully`);
+      res.status(201).send(`migrate ingredients successfully`);
     }
   });
 });
