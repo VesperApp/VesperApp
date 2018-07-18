@@ -1,7 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
 
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('app')
-);
+import Header from './components/Header.jsx';
+
+class App extends React.Component {
+  render() {
+    return(
+      <div className="main">
+          {
+             <Header/>
+            // <Search/>
+            // <ResultsList/>
+            // <Footer/>
+          }
+      </div>
+      )
+    }
+  }
+
+ReactDOM.render(<App />, document.getElementById('app'));
