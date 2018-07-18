@@ -7,7 +7,6 @@ const ingredientSchema = mongoose.Schema({
 
 const Ingredient = mongoose.model('Ingredient', ingredientSchema);
 
-
 // TODO: Return all ingredients
 Ingredient.findAll = () => {};
 
