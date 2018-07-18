@@ -3,9 +3,10 @@ import React from 'react';
 class SignUp extends React.Component {
   render () {
     return (
-      <div className='signUpBox'>
+      <div className='formView'>
        <form>
-        <h2> Sign up</h2>
+
+        <div className="title">  Sign up </div>
          <input type='text' name='userName' placeholder='Your username'/>
          <input type='email' name='email' placeholder='Your email'/>
          <input type='password' name='password' placeholder='Your password'/>
