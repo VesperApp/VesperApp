@@ -47,7 +47,15 @@ app.post('/ingredients/migrate', (req, res) => {
 });
 
 // TODO: GET: return all ingredients
-app.post('/ingredients', (req, res) => {});
+app.get('/ingredients', (req, res) => {
+  ingredient.findAll((err, drinks) => {
+    if (err) {
+      res.status(500).send("GET /ingredients failed");
+    } else {
+      res.status(200).send(drinks);
+    }
+  });
+});
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
