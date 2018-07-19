@@ -30,17 +30,13 @@ class Header extends React.Component {
           <div>
               <SignUp/>
           </div>
-
-          <div>
-            <Search/>
-          </div>
         </div>
       </div>
     )
   }
 }
 
-export default Header
+export default Header;
 
 //add Login component
 //add Sign up component

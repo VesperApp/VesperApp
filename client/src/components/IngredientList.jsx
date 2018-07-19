@@ -1,21 +1,27 @@
 import React from 'react';
 
-class IngredientList extends React.Component {
-  render() {
-    return (
-      <div className="ingredientLists">
+const IngredientList = (props) => {
+  const {ingredients} = props;
+  const IngredientItems = ingredients.map((ingredient, i) =>
+    <div className="item" key={i}>
+      <span>{ingredient}</span>
+      <span
+        onClick={() => props.onRemove(ingredient)}
+        className="putRigth">
+        X
+      </span>
+    </div>
+  );
+
+  return (
+    <div className="ingredientLists">
       <div className="title">
         This is the selected IngredientList component
       </div>
-      <div className="item">
-        <span>Sucre</span>
-        <span className="putRigth">X</span>
-      </div>
-
+      {IngredientItems}
       <input type="submit" value="Submit"/>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default IngredientList
+export default IngredientList;
