@@ -1,10 +1,12 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+
 const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
 const ingredient  = require('../database/ingredient.js');
+const user  = require('../database/user.js');
 
 let app = express();
-
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -19,7 +21,6 @@ app.get('/drinks', (req, res) => {
       res.status(200).send(drinks);
     }
   });
-
 });
 
 // GET: return all drinks by ingredient list
@@ -37,7 +38,6 @@ app.post('/drinksByIngredient', (req, res) => {
     }
   })
 });
-
 
 // POST: migrate data from drinks.js into mongodb
 app.post('/drinks/migrate', (req, res) => {
@@ -75,6 +75,47 @@ app.get('/ingredients', (req, res) => {
     }
   });
 });
+
+
+app.post('/signUp',(req, res)=>{
+  var q = req.body
+  var password = req.body.password
+
+  var hashPass = bcrypt.hashSync('password', 10);
+    // change the object
+    //q["password"] = hashPass
+    // i got some bug in the bcrypt
+    //console.log("See the hash",q)
+    user.signUp(q)
+    res.send(q)
+})
+
+app.post('/logIn',(req, res)=>{
+  var q = req.body ;
+  var email = req.body.email ;
+  var password = req.body.email ;
+  var password = req.body.password ;
+
+  user.findOne(q,(err,data)=>{
+    if(err){
+      res.send("Login fail")
+    }else{
+      if(data != null ){
+        res.send(data)
+      }else{
+        res.send("Login fail")
+      }
+      // bug with  bcrypt
+      // bcrypt.compare(password,data.password,function(err,result){
+      //   if(result == true){
+      //     res.send(data)
+      //   }else{
+      //     res.send(err)
+      //   }
+      // })
+    }
+  })
+})
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
