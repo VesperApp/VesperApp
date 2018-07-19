@@ -35,4 +35,4 @@ class ResultsList extends React.Component {
   }
 }
 
-export default ResultsList
+export default ResultsList;

@@ -40,7 +40,7 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+export default Header;
 
 //add Login component
 //add Sign up component
