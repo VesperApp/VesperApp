@@ -1,16 +1,11 @@
 const mongoose = require('./db.js');
-const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
   name: {type: String, unique: true, trim: true},
   password: String,
-  email:{
-    type: String,
-    required: true,
-    unique : true,
-    trim: true
-  },
-  favDrinks: []
+  favDrinks: Array,
+  email: String,
+  favDrinks: Array
 });
 
 const User = mongoose.model('User', userSchema);
@@ -18,28 +13,35 @@ const User = mongoose.model('User', userSchema);
 // TODO: Find specific user's favorite drinks
 User.findFavDrinks = () => {};
 
-User.signUp = (userObject) =>{
-   var user_sign = new User(userObject);
-   user_sign.save((err)=>{
-    if(err){
-      console.log(err)
-    }else{
-      console.log("the user collection have save");
-    }
-   })
-}
+User.register = (req, cb) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  let email = req.body.email;
 
-User.login = function(email,callback){
-    // ingredients is an object
-
-    User.findOne(email,(err,data)=>{
-      if(err){
-        console.log("Find an error",err);
-        callback(null, error)
-      }else{
-        callback(null, data);
+  User.create({name: username,
+    password: password,
+    email: email}, function(err,data) {
+      if(err) {
+        console.log("Database user save error: ",err)
+        cb(err, null)
       }
-    })
+      else {
+        cb(null, data)
+      }
+  })
+};
+
+
+User.login = (req, cb) => {
+  let username = req.body.username;
+  // let username = req;
+
+  User.find({name: username}, function(err, data){
+    if(err) {
+      cb(err,null);
+    } else {
+      cb(null, data);
+    }
+  })
 }
 
-module.exports = User;

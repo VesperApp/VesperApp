@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bcrypt = require('bcrypt');
 
@@ -5,6 +6,7 @@ const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
 const ingredient  = require('../database/ingredient.js');
 const user  = require('../database/user.js');
+const session = require('express-session');
 
 let app = express();
 app.use(bodyParser.json());
@@ -15,6 +17,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.get('/drinks', (req, res) => {
 
   drink.findAll((err, drinks) => {
+
     if (err) {
       res.status(500).send("GET /drinks failed");
     } else {
@@ -41,7 +44,7 @@ app.post('/drinksByIngredient', (req, res) => {
 
 
 // POST: migrate data from drinks.js into mongodb
-app.post('/drinks/migrate', (req, res) => {
+app.post('/data/reset', (req, res) => {
   drink.migrate((err, drinks) => {
     if (err) {
       res.status(500).send("POST /drink migration failed");
@@ -60,67 +63,65 @@ app.post('/drinks/migrate', (req, res) => {
 // TODO: POST: return drinks by given ingredients
 app.post('/drinks', (req, res) => {});
 
-
-// POST: migrate data from ingredient.js into mongodb **** DELETE --> this function merged itno Drink Migration:
-app.get('/ingredients/migrate', (req, res) => {
-  //This function merged into Drink migration. see above.
-});
-
 // TODO: GET: return all ingredients
 app.get('/ingredients', (req, res) => {
   ingredient.findAll((err, drinks) => {
     if (err) {
       res.status(500).send("GET /ingredients failed");
     } else {
-      res.status(200).send(drinks);
+      res.status(200).send(drinks[0]);
     }
   });
 });
 
-
-app.post('/signUp',(req, res)=>{
-  var q = req.body
-  var password = req.body.password
-
-  var hashPass = bcrypt.hashSync('password', 10);
-    // change the object
-    //q["password"] = hashPass
-    // i got some bug in the bcrypt
-    //console.log("See the hash",q)
-    user.signUp(q)
-    res.send(q)
-})
-
-app.post('/logIn',(req, res)=>{
-  var q = req.body ;
-  var email = req.body.email ;
-  var password = req.body.email ;
-  var password = req.body.password ;
-
-  user.findOne(q,(err,data)=>{
-    if(err){
-      res.send("Login fail")
-    }else{
-      if(data != null ){
-        res.send(data)
-      }else{
-        res.send("Login fail")
-      }
-      // bug with  bcrypt
-      // bcrypt.compare(password,data.password,function(err,result){
-      //   if(result == true){
-      //     res.send(data)
-      //   }else{
-      //     res.send(err)
-      //   }
-      // })
-    }
-  })
-})
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
 
+/************************************************************/
+// Authentication routes here
+/************************************************************/
+
+app.post('/signup',function(req,res) {
+
+  //create a hash:
+  bcrypt.hash(req.body.password, 1, function(err, hash) {
+
+    //reset the req password as the hash
+    req.body.password = hash;
+
+    //send req to save user to database
+    user.register(req,function(err,data) {
+      if(err) {
+        res.send(err);
+      } else {
+        res.send(data);
+      }
+    })
+
+  });
+
+})
+
+
+app.post('/login', function(req,res) {
+  user.login(req, function(err,data) {
+    if(err) {
+      console.log("DATABASE RETURN FAIL")
+      res.send(err);
+    } else {
+      bcrypt.compare(req.body.password, data[0].password, function(err, bcryptRes) {
+          if(err) {
+            console.log("BCRYPT ERR")
+            res.send(err);
+          } else {
+            console.log("BCRYPT RES: ", bcryptRes)
+            res.send(bcryptRes);
+          }
+      });
+    }
+  })
+})
 
