@@ -24,9 +24,15 @@ app.get('/drinks', (req, res) => {
 app.post('/drinks/migrate', (req, res) => {
   drink.migrate((err, drinks) => {
     if (err) {
-      res.status(500).send("POST /migrate failed");
+      res.status(500).send("POST /drink migration failed");
     } else {
-      res.status(201).send(`migrate ${drinks.length} drinks successfully`);
+        ingredient.migrate((err, ingredients) => {
+          if (err) {
+            res.status(500).send(`POST /migrate failed. Ensure drink data (/drinks) has been successfully loaded first. Error: ${err}`);
+          } else {
+            res.status(201).send(`SUCCESS migrated drinks and ingredients data successfully!`);
+          }
+        });
     }
   });
 });
@@ -35,19 +41,21 @@ app.post('/drinks/migrate', (req, res) => {
 app.post('/drinks', (req, res) => {});
 
 
-// POST: migrate data from ingredient.js into mongodb
-app.post('/ingredients/migrate', (req, res) => {
-  drink.migrate((err, ingredients) => {
-    if (err) {
-      res.status(500).send(`POST /migrate failed, ${err}`);
-    } else {
-      res.status(201).send(`migrate ${ingredients.length} ingredients successfully`);
-    }
-  });
+// POST: migrate data from ingredient.js into mongodb **** DELETE --> this function merged itno Drink Migration:
+app.get('/ingredients/migrate', (req, res) => {
+  //This function merged into Drink migration. see above.
 });
 
 // TODO: GET: return all ingredients
-app.post('/ingredients', (req, res) => {});
+app.get('/ingredients', (req, res) => {
+  ingredient.findAll((err, drinks) => {
+    if (err) {
+      res.status(500).send("GET /ingredients failed");
+    } else {
+      res.status(200).send(drinks);
+    }
+  });
+});
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
