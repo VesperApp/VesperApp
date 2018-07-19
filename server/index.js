@@ -62,11 +62,13 @@ app.post('/drinks/migrate', (req, res) => {
 app.post('/user', (req,res) => {
   let hardCodeDrink = {"_id":{"$oid":"5b4d76daf2fc771b06ef85fa"},"idDrink":{"$numberInt":"15346"},"strDrink":"155 Belmont","strVideo":"","strCategory":"Cocktail","strIBA":"","strAlcoholic":"Alcoholic","strGlass":"White wine glass","strInstructions":"Blend with ice. Serve in a wine glass. Garnish with carrot.","strDrinkThumb":"https://www.thecocktaildb.com/images/media/drink/yqvvqs1475667388.jpg","strIngredient1":"Dark rum","strIngredient2":"Light rum","strIngredient3":"Vodka","strIngredient4":"Orange juice","strIngredient5":"","strIngredient6":"","strIngredient7":"","strIngredient8":"","strIngredient9":"","strIngredient10":"","strIngredient11":"","strIngredient12":"","strIngredient13":"","strIngredient14":"","strIngredient15":"","strMeasure1":"1 shot ","strMeasure2":"2 shots ","strMeasure3":"1 shot ","strMeasure4":"1 shot ","strMeasure5":" ","strMeasure6":" ","strMeasure7":" ","strMeasure8":" ","strMeasure9":" ","strMeasure10":"","strMeasure11":"","strMeasure12":"","strMeasure13":"","strMeasure14":"","strMeasure15":"","dateModified":{"$date":{"$numberLong":"1475685388000"}},"__v":{"$numberInt":"0"}};
 
-
-
-
-
-
+  user.findFavDrinks(hardCodeDrink, (err ,data) => {
+    if (err) {
+      console.log("POST /add favoriteDrink failed");
+    } else {
+      res.send(data);
+    }
+  });
 })
 
 // TODO: POST: return drinks by given ingredients
