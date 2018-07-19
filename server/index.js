@@ -22,7 +22,6 @@ app.get('/drinks', (req, res) => {
 
 });
 
-
 // GET: return all drinks by ingredient list
 app.post('/drinksByIngredient', (req, res) => {
  // var qr = req.body // to get the params
