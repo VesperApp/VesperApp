@@ -5,13 +5,15 @@ import $ from 'jquery';
 import Header from './components/Header.jsx';
 import Search from './components/Search.jsx';
 import ResultsList from './components/ResultsList.jsx';
+import IngredirentList from './components/IngredientList.jsx';
+
+import ingredients from '../../database/data/ingredients.js';
 
 class App extends React.Component {
   render() {
-    return(
+    return (
       <div className="main">
-        <Header/>
-        <ResultsList/>
+        <Search listIngredients={ingredients}/>
       </div>
     )
   }
