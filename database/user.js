@@ -17,6 +17,7 @@ User.findFavDrinks = (query, callback) => {
     if (err) {
       throw err;
     } else {
+      // push the data into favDrinks array
       // User.favDrinks.push(data);
       callback(null, data)
     }
@@ -26,12 +27,16 @@ User.findFavDrinks = (query, callback) => {
 
 User.removeFavDrinks = (query, callback) => {
   // locate the correct drink in favDrinksArray
-  for(var i = 0; i < User.favDrinks.length; i++) {
-    if(User.favDrinks[i] === query._id) {
-      delete User.favDrinks[i];
+  User.findById('5b50f96602b1850bd2fff872', (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      // remove object from array
+      //
+      callback(null, data)
     }
-  }
-  callback(null, User.favDrinks[i]);
+  })
+
 }
 
 
