@@ -3,8 +3,13 @@ const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
 const ingredient  = require('../database/ingredient.js');
 
+const user = require('../database/user.js')
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
 let app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -40,7 +45,7 @@ app.post('/drinksByIngredient', (req, res) => {
 
 
 // POST: migrate data from drinks.js into mongodb
-app.post('/drinks/migrate', (req, res) => {
+app.post('/data/reset', (req, res) => {
   drink.migrate((err, drinks) => {
     if (err) {
       res.status(500).send("POST /drink migration failed");
@@ -60,10 +65,6 @@ app.post('/drinks/migrate', (req, res) => {
 app.post('/drinks', (req, res) => {});
 
 
-// POST: migrate data from ingredient.js into mongodb **** DELETE --> this function merged itno Drink Migration:
-app.get('/ingredients/migrate', (req, res) => {
-  //This function merged into Drink migration. see above.
-});
 
 // TODO: GET: return all ingredients
 app.get('/ingredients', (req, res) => {
@@ -81,4 +82,48 @@ app.listen(3000, function() {
 });
 
 
+/************************************************************/
+// Authentication routes here
+/************************************************************/
+
+app.post('/signup',function(req,res) {
+
+  //create a hash:
+  bcrypt.hash(req.body.password, 1, function(err, hash) {
+
+    //reset the req password as the hash
+    req.body.password = hash;
+
+    //send req to save user to database
+    user.register(req,function(err,data) {
+      if(err) {
+        res.send(err);
+      } else {
+        res.send(data);
+      }
+    })
+
+  });
+
+})
+
+
+app.post('/login', function(req,res) {
+  user.login(req, function(err,data) {
+    if(err) {
+      console.log("DATABASE RETURN FAIL")
+      res.send(err);
+    } else {
+      bcrypt.compare(req.body.password, data[0].password, function(err, bcryptRes) {
+          if(err) {
+            console.log("BCRYPT ERR")
+            res.send(err);
+          } else {
+            console.log("BCRYPT RES: ", bcryptRes)
+            res.send(bcryptRes);
+          }
+      });
+    }
+  })
+})
 
