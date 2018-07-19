@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
@@ -13,6 +14,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.get('/drinks', (req, res) => {
 
   drink.findAll((err, drinks) => {
+
     if (err) {
       res.status(500).send("GET /drinks failed");
     } else {
