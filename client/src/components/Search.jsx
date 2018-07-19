@@ -66,6 +66,7 @@ class Search extends React.Component {
           <span>{this.state.errMsg}</span>
         </form>
         <IngredientList
+          onRoute={this.props.onRoute}
           onRemove={this.removeItem}
           ingredients={this.state.listIngredients}
         />

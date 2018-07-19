@@ -7,6 +7,10 @@ body {
   margin: auto;
 }
 
+.listView tr {
+  cursor:pointer;
+}
+
 .formView {
     position: relative;
     background:#fff;

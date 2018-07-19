@@ -1,43 +1,58 @@
 import React from 'react';
+import CocktailDetails from './CocktailDetails.jsx';
 
 class FavoriteList extends React.Component {
-  render() {
-    return (
-      <div className="listView">
-        <table className="table table-hover " >
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Drink</th>
-              <th scope="col">Category</th>
-              <th scope="col">Save</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>3 Wise Men</td>
-              <td>Alchoholic</td>
-              <td>thumbs up icon</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>252</td>
-              <td>Alchoholic</td>
-              <td>thumbs up icon</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>A Day at the Beach</td>
-              <td>Alchoholic</td>
-              <td>thumbs up icon</td>
-            </tr>
-          </tbody>
-        </table>
-       </div>
-    );
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedDrink: null
+    };
+    this.handleRowClick = this.handleRowClick.bind(this);
   }
 
+  handleRowClick(e, drink) {
+    e.stopPropagation();
+    this.setState({selectedDrink: drink});
+  }
+
+  render() {
+    const {user, onRemove} = this.props;
+    const TableRows = user.favDrinks.map((drink, i) => (
+      <tr onClick={(e) => this.handleRowClick(e, drink)} key={i}>
+        <th scope="row">{i + 1}</th>
+        <td>{drink.strDrink}</td>
+        <td>{drink.strCategory}</td>
+        <td onClick={(e) => {
+          onRemove(e, drink);
+          this.handleRowClick(e, null);
+        }}>
+          <a>
+            <span className="glyphicon glyphicon-remove"></span>
+          </a>
+        </td>
+      </tr>
+    ));
+    return (
+      <div>
+        <div className="listView">
+          <table className="table table-hover " >
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Drink Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {TableRows}
+            </tbody>
+          </table>
+        </div>
+        <CocktailDetails drink={this.state.selectedDrink}/>
+      </div>
+    );
+  }
 }
 
 export default FavoriteList;
