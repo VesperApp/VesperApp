@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
+const user  = require('../database/user.js');
 const ingredient  = require('../database/ingredient.js');
 
 const user = require('../database/user.js')
@@ -62,6 +63,28 @@ app.post('/data/reset', (req, res) => {
     }
   });
 });
+
+//TODO: POST: add a favorite drink
+app.post('/user', (req,res) => {
+  user.findFavDrinks(req.body, (err ,data) => {
+    if (err) {
+      console.log("POST /add favoriteDrink failed");
+    } else {
+      res.send(data);
+    }
+  });
+})
+
+//TODO: POST: remove a favorite drink
+app.post('/user', (req, res) => {
+  user.removeFavDrinks(req.body , (err, data) => {
+    if (err) {
+      console.log('Post /remove favoriteDrink failed')
+    } else {
+      res.send(data);
+    }
+  })
+})
 
 // TODO: POST: return drinks by given ingredients
 app.post('/drinks', (req, res) => {});
