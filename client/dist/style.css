@@ -2,6 +2,11 @@ body {
   background: #eee;
 }
 
+.listView {
+  width: 40%;
+  margin: auto;
+}
+
 .formView {
     position: relative;
     background:#fff;
@@ -198,3 +203,4 @@ body {
     width: 100px;
      position: relative;
 }
+
