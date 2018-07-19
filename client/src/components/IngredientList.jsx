@@ -6,7 +6,7 @@ const IngredientList = (props) => {
     <div className="item" key={i}>
       <span>{ingredient}</span>
       <span
-        onClick={() => this.props.onRemove(ingredient)}
+        onClick={() => props.onRemove(ingredient)}
         className="putRigth">
         X
       </span>
