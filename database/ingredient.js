@@ -38,6 +38,9 @@ Ingredient.migrate = (callback) => {
       uniqIngredients[ele['strIngredient14']]=1;
       uniqIngredients[ele['strIngredient15']]=1;
     })
+
+    delete uniqIngredients[""];
+
     Ingredient.collection.insert(uniqIngredients, (err, ingredients) => {
       callback(err, ingredients);
     })
