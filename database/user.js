@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   name: {type: String, unique: true},
   emai: String,
   password: String,
+  email: String,
   favDrinks: Array
 });
 
@@ -45,5 +46,44 @@ module.exports = User;
 /*
 new schema
 
+<<<<<<< HEAD
 const userSchema = mongoose.Schema({   name: {type: String, unique: true, trim: true},   password: String,   email:{     type: String,     required: true,     unique : true,     trim: true   },   favDrinks: [] });
 */
+=======
+
+User.register = (req, cb) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  let email = req.body.email;
+
+  User.create({name: username,
+    password: password,
+    email: email}, function(err,data) {
+      if(err) {
+        console.log("Database user save error: ",err)
+        cb(err, null)
+      }
+      else {
+        cb(null, data)
+      }
+    })
+};
+
+
+User.login = (req, cb) => {
+  let username = req.body.username;
+  // let username = req;
+
+  User.find({name: username}, function(err, data){
+    if(err) {
+      cb(err,null);
+    } else {
+      cb(null, data);
+    }
+  })
+}
+
+
+module.exports = User;
+
+>>>>>>> a39de5383ab3bd2b13ff82f45661fcc6613513d2
