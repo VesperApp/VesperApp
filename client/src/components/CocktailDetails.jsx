@@ -11,12 +11,17 @@ import React from 'react';
   // div
     // will get strInstructions as props
     // add the html and css to this
-class CocktailDetails extends React.components {
-
+class CocktailDetails extends React.Component {
   render() {
     return (
       <div>
-        Drink Details
+        <h1>Drink Details</h1>
+        <div>
+          <h4>name of recipe</h4>
+        </div>
+        <div>
+          <p>description</p>
+        </div>
       </div>
     )
   }
@@ -24,4 +29,4 @@ class CocktailDetails extends React.components {
 
 }
 
-export default CocktailDetails
+export default CocktailDetails;
