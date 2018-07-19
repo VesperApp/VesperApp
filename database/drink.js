@@ -52,16 +52,28 @@ Drink.findAll = (callback) => {
     callback(err, drinks);
   });
 };
+
+
 // TODO: Return drinks that match exactly with given ingredients
-Drink.findByIngredients = (ingredients) => {
-  // ingredients is an object
-};
+Drink.selectDrinkByigredients = function(query,callback){
+    // ingredients is an object
+    Drink.find(query,function(err,drinks){
+      if(err){
+        console.log("Find an error",err);
+        callback(null, error)
+      }else{
+        callback(null, drinks);
+      }
+    })
+}
 
 // Migrate data from drinks.js into mongodb
 Drink.migrate = (callback) => {
-  Drink.collection.insert(drinksData, (err, drinks) => {
-    callback(err, drinks);
-  })
+  if(Drink.collection.drop()){
+    Drink.collection.insert(drinksData, (err, drinks) => {
+      callback(err, drinks);
+    })
+  }
 }
 
 module.exports = Drink;

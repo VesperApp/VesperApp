@@ -7,7 +7,9 @@ class Search extends React.Component {
     return (
       <div className="search">
         <form className="searchView">
-          <div className="title">What ingredients do you have?</div>
+          <div className="title">
+            What ingredients do you have?
+          </div>
           <input type='text' placeholder='rum' />
           <input type='submit' value = 'Add'/>
         </form>
