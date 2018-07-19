@@ -72,7 +72,7 @@ app.get('/ingredients', (req, res) => {
     if (err) {
       res.status(500).send("GET /ingredients failed");
     } else {
-      res.status(200).send(drinks);
+      res.status(200).send(drinks[0]);
     }
   });
 });
