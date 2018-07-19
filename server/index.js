@@ -28,7 +28,7 @@ app.post('/drinksByIngredient', (req, res) => {
  // var qr = req.body // to get the params
  // how ll got value in the get method ?
 
-  var q = {strDrink:/155 Belm/ } // like
+  var q = {ind:/155 Belm/ } // like
   drink.selectDrinkByigredients(q, function(err, data){
     if(err){
       console.log("The error", error)
@@ -38,6 +38,7 @@ app.post('/drinksByIngredient', (req, res) => {
     }
   })
 });
+
 
 // POST: migrate data from drinks.js into mongodb
 app.post('/drinks/migrate', (req, res) => {
