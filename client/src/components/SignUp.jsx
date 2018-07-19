@@ -5,7 +5,6 @@ class SignUp extends React.Component {
     return (
       <div className='formView'>
        <form>
-
         <div className="title">  Sign up </div>
          <input type='text' name='userName' placeholder='Your username'/>
          <input type='email' name='email' placeholder='Your email'/>

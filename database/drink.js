@@ -69,9 +69,11 @@ Drink.selectDrinkByigredients = function(query,callback){
 
 // Migrate data from drinks.js into mongodb
 Drink.migrate = (callback) => {
-  Drink.collection.insert(drinksData, (err, drinks) => {
-    callback(err, drinks);
-  })
+  if(Drink.collection.drop()){
+    Drink.collection.insert(drinksData, (err, drinks) => {
+      callback(err, drinks);
+    })
+  }
 }
 
 module.exports = Drink;

@@ -1,6 +1,27 @@
 body {
   background: #eee;
 }
+<<<<<<< HEAD
+.header{
+  border: 1px solid black;
+  width: 100%;
+  height: 260px;
+  background: #fff;
+}
+
+.loginBox{
+  border: 1px solid red;
+}
+
+
+.signUpBox{
+  border: 1px solid blue;
+}
+
+.search{
+  border: 1px solid green;
+}
+=======
 
 .formView {
     position: relative;
@@ -198,3 +219,4 @@ body {
     width: 100px;
      position: relative;
 }
+>>>>>>> front_end_edits
