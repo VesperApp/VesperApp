@@ -30,10 +30,6 @@ class Header extends React.Component {
           <div>
               <SignUp/>
           </div>
-
-          <div>
-            <Search/>
-          </div>
         </div>
       </div>
     )

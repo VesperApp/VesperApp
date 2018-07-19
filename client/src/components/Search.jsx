@@ -50,7 +50,6 @@ class Search extends React.Component {
   }
 
   render() {
-    const {serchInput} = this.state;
     return (
       <div className="search">
         <form className="searchView">
