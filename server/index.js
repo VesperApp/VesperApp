@@ -11,6 +11,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 // GET: return all drinks
 app.get('/drinks', (req, res) => {
+
   drink.findAll((err, drinks) => {
     if (err) {
       res.status(500).send("GET /drinks failed");
@@ -18,7 +19,25 @@ app.get('/drinks', (req, res) => {
       res.status(200).send(drinks);
     }
   });
+
 });
+
+// GET: return all drinks by ingredient list
+app.post('/drinksByIngredient', (req, res) => {
+ // var qr = req.body // to get the params
+ // how ll got value in the get method ?
+
+  var q = {strDrink:/155 Belm/ } // like
+  drink.selectDrinkByigredients(q, function(err, data){
+    if(err){
+      console.log("The error", error)
+    }else{
+      console.log("the data form database",data)
+      res.send(data)
+    }
+  })
+});
+
 
 // POST: migrate data from drinks.js into mongodb
 app.post('/drinks/migrate', (req, res) => {
@@ -60,3 +79,6 @@ app.get('/ingredients', (req, res) => {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
+
+
+

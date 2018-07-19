@@ -11,7 +11,8 @@ class Header extends React.Component {
       <div className="headerContent">
         <div className="header">
           <div>
-            <img src=" http://www.finsmes.com/wp-content/uploads/2018/05/vesper.png" width="150px" className="logo"/></div>
+            <img src=" http://www.finsmes.com/wp-content/uploads/2018/05/vesper.png" width="150px" className="logo"/>
+            </div>
            <h1>Vesper header</h1>
             <div className="login"> Login
             </div>
