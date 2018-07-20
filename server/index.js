@@ -19,7 +19,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// GET: return all drinks
+// GET: (DEBUGGER route) return all drinks
 app.get('/drinks', (req, res) => {
 
   drink.findAll((err, drinks) => {
@@ -32,15 +32,14 @@ app.get('/drinks', (req, res) => {
   });
 });
 
-// GET: return all drinks by ingredient list
+// GET: main search funtion: return all drinks by target ingredient list.
+// client req (req.body) structured as object with ingredients as key. This function will convert the req object into an array.
+// response is an array containing matched drink objects.
 app.post('/drinksByIngredient', (req, res) => {
- // var qr = req.body // to get the params
- // how ll got value in the get method ?
-
-  // var q = {ind:/155 Belm/ } // like
   drink.selectDrinkByigredients(req.body.keys(), function(err, data){
     if(err){
       console.log("QUERY error", error)
+      res.send(err)
     }else{
       console.log("the drinks returned from the database", data)
       res.send(data)
@@ -49,7 +48,7 @@ app.post('/drinksByIngredient', (req, res) => {
 });
 
 
-// POST: migrate data from drinks.js into mongodb
+// POST: (DEBUGGER route) migrate data from drinks.js into mongodb
 app.post('/data/reset', (req, res) => {
   drink.migrate((err, drinks) => {
     if (err) {
@@ -89,7 +88,7 @@ app.post('/user', (req, res) => {
 })
 
 
-// TODO: GET: return all ingredients
+// TODO: GET: (DEBUGGER route) return all ingredients
 app.get('/ingredients', (req, res) => {
   ingredient.findAll((err, drinks) => {
     if (err) {
@@ -110,12 +109,12 @@ app.listen(3000, function() {
 // Authentication routes here
 /************************************************************/
 
-//on signup - req should include:
+//on signup - client req should have:
 // req.body.username
 // req.body.password
 // req.body.email
 
-
+//signup: if successful signup will return true. If erorr on signup will return database error.
 app.post('/signup',function(req,res) {
   //create a hash:
   bcrypt.hash(req.body.password, 1, function(err, hash) {
@@ -133,12 +132,12 @@ app.post('/signup',function(req,res) {
 })
 
 
-//on login - req should include:
+//on login - client req should have:
 // req.body.username
 // req.body.password
 
-//route login will return true/false given username/password
-
+//route login will return: true/false given username/password.
+//if true a session will be created.
 app.post('/login', function(req,res) {
   user.login(req, function(err,data) {
     if(err) {
@@ -162,26 +161,30 @@ app.post('/login', function(req,res) {
   })
 })
 
+//logout: destroy session:
+//returns true if session destroyed, flase if error.
 app.get('/logout', function(req, res) {
   req.session.destroy(function(err) {
   // cannot access session here
   if(err) {
     console.log("Logout ERROR: ", err);
+    res.send(false);
+
   }
-    res.send('session deleted. logged out');
+    res.send(true);
   })
 })
 
-//create a session:
+//create a session - helper function:
 var createSession = function(req, res, userName) {
   req.session.regenerate(function(err) {
   // will have a new session here
     req.session.user = userName;
-    res.send("Session created");
+    res.send(true);
   })
 };
 
-//check if session is valid:
+//check if session is valid - helper functon:
 var checkSession = function(req, res, next) {
   if(req.session.user) {
     next();
