@@ -7,6 +7,10 @@ body {
   margin: auto;
 }
 
+.listView tr {
+  cursor:pointer;
+}
+
 .formView {
     position: relative;
     background:#fff;
@@ -208,6 +212,7 @@ body{
 .header img{
     width: 200px;
     position: absolute;
+    margin-left: 40px;
 }
 
 .header .appName
@@ -215,8 +220,8 @@ body{
     font-size: 42px;
     /* border: 1px solid red; */
     position: absolute;
-    margin-left: 40%;
-    margin-top: 15px;
+    margin-left: 45%;
+    margin-top: 18px;
     color: #336699;
     font-family: inherit;
 }

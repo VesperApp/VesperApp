@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
-const ingredient  = require('../database/ingredient.js');
 const user  = require('../database/user.js');
+const ingredient  = require('../database/ingredient.js');
 const session = require('express-session');
 
 let app = express();
@@ -60,6 +60,28 @@ app.post('/data/reset', (req, res) => {
   });
 });
 
+//TODO: POST: add a favorite drink
+app.post('/user', (req,res) => {
+  user.findFavDrinks(req.body, (err ,data) => {
+    if (err) {
+      console.log("POST /add favoriteDrink failed");
+    } else {
+      res.send(data);
+    }
+  });
+})
+
+//TODO: POST: remove a favorite drink
+app.post('/user', (req, res) => {
+  user.removeFavDrinks(req.body , (err, data) => {
+    if (err) {
+      console.log('Post /remove favoriteDrink failed')
+    } else {
+      res.send(data);
+    }
+  })
+})
+
 // TODO: POST: return drinks by given ingredients
 app.post('/drinks', (req, res) => {});
 
@@ -85,7 +107,6 @@ app.listen(3000, function() {
 /************************************************************/
 
 app.post('/signup',function(req,res) {
-
   //create a hash:
   bcrypt.hash(req.body.password, 1, function(err, hash) {
 
@@ -100,11 +121,8 @@ app.post('/signup',function(req,res) {
         res.send(data);
       }
     })
-
   });
-
 })
-
 
 app.post('/login', function(req,res) {
   user.login(req, function(err,data) {

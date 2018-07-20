@@ -45,13 +45,12 @@ class Header extends React.Component {
           <div>
             {this.state.sign ===true ?  <SignUp/> : null}
           </div>
-          <div>
-            <Search/>
-          </div>
         </div>
       </div>
     )
   }
 }
+export default Header;
 
-export default Header
+//add Login component
+//add Sign up component
