@@ -47,7 +47,7 @@ User.findFavDrinks = (query, callback) => {
   })
 };
 
-User.findFavDrinks();
+// User.findFavDrinks();
 
 
 
