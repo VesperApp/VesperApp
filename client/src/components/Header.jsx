@@ -20,6 +20,7 @@ class Header extends React.Component {
     
   }
   componentDidMount(){
+
     var user = localStorage.getItem("users");
     if(user){
       var objUser = JSON.parse(user)
@@ -92,7 +93,7 @@ class Header extends React.Component {
                this.state.user != true  ? null :  
                 <div className="userName">
                 {
-                 this.state.userinfo.email 
+                 this.state.userinfo.name 
                 }
                 </div>
               }

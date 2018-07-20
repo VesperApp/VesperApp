@@ -128,7 +128,8 @@ app.post('/signup',function(req,res) {
       if(err) {
         res.send(err);
       } else {
-        createSession(req,res,req.body.username);
+        res.send(data)
+       // createSession(req,res,req.body.username);
       }
     })
   });

@@ -18,14 +18,14 @@ class Login extends React.Component {
         data:dataToSend,
         contentType: 'application/json',
         success: function (data) {
-            var data = data;
             console.log("See data", data)
-            if(Object.keys(data).length != 0){
+            if(data === true ){
                 location.reload();
                 // use local storage 
-                localStorage.setItem("users", JSON.stringify(data)); 
+                console.log("ddd",dataToSend)
+                localStorage.setItem("users", dataToSend); 
             }else{
-                alert("error connexion")
+                alert("Error login ")
             }
         },
         error: function (error) {
@@ -42,7 +42,7 @@ class Login extends React.Component {
           </div>
       <form  onSubmit={this.handleSubmit}>
         <div className="title">Login</div>
-        <input type='text' name='email' placeholder=" Your email" />
+        <input type='text' name='name' placeholder=" Your username" />
         <input type='text' name='password' placeholder=" Your password" />
         <input type="submit" value="Login"/>
       </form>

@@ -52,7 +52,7 @@ User.findFavDrinks = (query, callback) => {
 
 
 User.login = (req, cb) => {
-  let username = req.body.username;
+  let username = req.body.name;
 
   User.find({name: username}, function(err, data){
     if(err) {
