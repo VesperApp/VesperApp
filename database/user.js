@@ -1,6 +1,5 @@
 const mongoose = require('./db.js');
 
-
 const userSchema = mongoose.Schema({
   name: {type: String, unique: true},
   email: String,
@@ -10,7 +9,24 @@ const userSchema = mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-//
+
+User.register = (req, cb) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  let email = req.body.email;
+
+  User.create({name: username,
+    password: password,
+    email: email}, function(err,data) {
+      if(err) {
+        console.log("Database user save error: ",err)
+        cb(err, null)
+      }
+      else {
+        cb(null, data)
+      }
+  })
+};
 
 // TODO: Find specific user's favorite drinks and attach drink object to favDrinks array
 User.findFavDrinks = (query, callback) => {
