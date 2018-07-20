@@ -38,7 +38,7 @@ app.get('/drinks', (req, res) => {
 // client req (req.body) structured as object with ingredients as key. This function will convert the req object into an array.
 // response is an array containing matched drink objects.
 app.post('/drinksByIngredient', (req, res) => {
-  drink.selectDrinkByigredients(req.body.keys(), function(err, data){
+  drink.selectDrinkByigredients(Object.keys(req.body), function(err, data){
     if(err){
       console.log("QUERY error", error)
       res.send(err)

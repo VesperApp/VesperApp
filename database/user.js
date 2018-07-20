@@ -25,10 +25,11 @@ User.register = (req, cb) => {
       else {
         cb(null, data)
       }
-  })
+  });
 };
 
 // TODO: Find specific user's favorite drinks and attach drink object to favDrinks array
+
 User.findFavDrinks = (query, callback) => {
   // check to see if MongoIDkey  is unique
   User.findById("5b50f96602b1850bd2fff872", (err, drink) => { // just use find?
