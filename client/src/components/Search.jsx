@@ -27,12 +27,22 @@ class Search extends React.Component {
     e.preventDefault();
 
     let {listIngredients, serchInput} = this.state;
-    serchInput = serchInput.trim();
+    serchInput = serchInput.trim().toUpperCase();
 
-    const isValid = this.props.validIngredients[serchInput];
+    // using loop because we need to turn keys into uppercase
+    let isValid = false;
+    let addedIngre = null;
+    for (let ingre in this.props.validIngredients) {
+      if (ingre.toUpperCase() === serchInput) {
+        isValid = true;
+        addedIngre = ingre;
+        break;
+      }
+    }
+
     if (isValid) {
       this.setState({
-        listIngredients: [...listIngredients, serchInput],
+        listIngredients: [...listIngredients, addedIngre],
         serchInput: '',
         errMsg: '',
         showListengredientComponent: false
