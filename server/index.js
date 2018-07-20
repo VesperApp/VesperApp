@@ -37,12 +37,12 @@ app.post('/drinksByIngredient', (req, res) => {
  // var qr = req.body // to get the params
  // how ll got value in the get method ?
 
-  var q = {ind:/155 Belm/ } // like
-  drink.selectDrinkByigredients(q, function(err, data){
+  // var q = {ind:/155 Belm/ } // like
+  drink.selectDrinkByigredients(req.body.keys(), function(err, data){
     if(err){
-      console.log("The error", error)
+      console.log("QUERY error", error)
     }else{
-      console.log("the data form database",data)
+      console.log("the drinks returned from the database", data)
       res.send(data)
     }
   })
@@ -88,8 +88,6 @@ app.post('/user', (req, res) => {
   })
 })
 
-// TODO: POST: return drinks by given ingredients
-app.post('/drinks', (req, res) => {});
 
 // TODO: GET: return all ingredients
 app.get('/ingredients', (req, res) => {
