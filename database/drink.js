@@ -96,6 +96,7 @@ Drink.migrate = (callback) => {
 
 module.exports = Drink;
 
-Drink.selectDrinkByigredients(["Vodka","Gin","Ice","Lime juice cordial"],function(err,data){
-  console.log(data);
-});
+//Query test:
+// Drink.selectDrinkByigredients(["Vodka","Gin","Ice","Lime juice cordial"],function(err,data){
+//   console.log(data);
+// });
