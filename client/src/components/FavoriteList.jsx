@@ -45,7 +45,6 @@ class FavoriteList extends React.Component {
 
             <thead>
               <tr>
-
               </tr>
               <tr>
                 <th scope="col">#</th>

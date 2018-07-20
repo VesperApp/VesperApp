@@ -19,7 +19,8 @@ class App extends React.Component {
       drinks: [],
       user: user,
       search: true,
-      resultList: false
+      resultList: false,
+      favComponent: false
     }
     this.removeFavDrink = this.removeFavDrink.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -27,7 +28,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchValidIngredients();
-    this.fetchDrinks();
   }
 
   showSearchComponent() {
@@ -42,21 +42,20 @@ class App extends React.Component {
          .catch((err) => console.log(err));
   }
 
-  fetchDrinks() {
-    axios.get('/drinks')
-         .then((res) => this.setState({drinks: res.data.slice(0, 3)}))
-         .catch((err) => console.log(err));
-  }
-
   handleSearchSubmit(e, ingredients) {
-    console.log(ingredients);
+    let drinks = [];
     const postData = ingredients.reduce((obj, ingre) => {
       obj[ingre] = 1;
       return obj;
     }, {});
-    console.log(postData);
+
     axios.post('/drinksByIngredient', postData)
-         .then((res) => console.log(res))
+         .then((res) => {
+           this.setState({
+             drinks:res.data,
+             resultList: true
+           });
+         })
          .catch((err) => console.log(err));
   }
 
@@ -85,7 +84,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {search, resultList, drinks} = this.state;
+    const {user, search, resultList, drinks, favComponent} = this.state;
     const SearchComponent = (<Search
       handleSearchSubmit={this.handleSearchSubmit}
       validIngredients={this.state.validIngredients}/>);
@@ -94,7 +93,9 @@ class App extends React.Component {
         <Header/>
         {search ? SearchComponent : ''}
         {resultList ? <ResultsList drinks={drinks}/> : ''}
-        <FavoriteList onRemove={this.removeFavDrink} user={this.state.user}/>
+        {favComponent ?
+          <FavoriteList onRemove={this.removeFavDrink} user={user}/> : ''
+        }
       </div>
     )
   }
