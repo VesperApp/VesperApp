@@ -30,9 +30,15 @@ class ResultsList extends React.Component {
     ));
     return (
       <div>
-        <div className="listView">
+        <div className="resulView">
+        <div className="resultListView">
+          .. <div>
+                <h2> Result by ingredients </h2>
+              </div>
           <table className="table table-hover " >
+
             <thead>
+
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Drink Name</th>
@@ -46,6 +52,7 @@ class ResultsList extends React.Component {
           </table>
         </div>
         <CocktailDetails drink={this.state.selectedDrink}/>
+      </div>
       </div>
     );
   }

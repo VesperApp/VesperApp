@@ -12,7 +12,23 @@ class Header extends React.Component {
       sign : false,
       logoutBtn : false
     }
+    this.showLoginComponent = this.showLoginComponent.bind(this);
+    this.showSignUp = this.showSignUp.bind(this);
   }
+  showLoginComponent(){
+    this.setState({
+      login : true,
+      sign : false
+    })
+  }
+  showSignUp(){
+    this.setState({
+      login : false,
+      sign : true
+    })
+  }
+
+
   render () {
       return(
       <div className = "headerContent">
@@ -24,10 +40,10 @@ class Header extends React.Component {
               Vesper
             </div>
             <div className="boxBtn">
-              <div className="login btn">
+              <div className="login btn" onClick={this.showLoginComponent} >
                 Login
               </div>
-              <div className="sign btn">
+              <div className="sign btn" onClick={this.showSignUp}>
                 Sign up
               </div>
               {this.state.logoutBtn === true ?
