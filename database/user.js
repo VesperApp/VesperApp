@@ -44,17 +44,7 @@ User.login = (req, cb) => {
   })
 }
 
-User.edit = (newParam) => {
-  User.findById('5b50e39cc98901096805e2aa',function(err,data){
-    console.log(data);
-    data.password = "this is the new password";
-    data.save(function(err,updatedata) {
-      console.log(updatedata);
-    })
-  })
-}
-
 
 module.exports = User;
 
-User.edit("HI");
+
