@@ -19,6 +19,7 @@ class FavoriteList extends React.Component {
     const {user, onRemove} = this.props;
     const TableRows = user.favDrinks.map((drink, i) => (
       <tr onClick={(e) => this.handleRowClick(e, drink)} key={i}>
+
         <th scope="row">{i + 1}</th>
         <td>{drink.strDrink}</td>
         <td>{drink.strCategory}</td>
@@ -36,7 +37,14 @@ class FavoriteList extends React.Component {
       <div>
         <div className="listView">
           <table className="table table-hover " >
+
             <thead>
+              <tr>
+               <div className="fav">
+               <h4>
+                User favoris should show after login also the result component have been hide
+                </h4> </div>
+              </tr>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Drink Name</th>

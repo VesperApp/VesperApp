@@ -9,13 +9,15 @@ class Search extends React.Component {
     this.state = {
       listIngredients: [],
       serchInput: '',
-      errMsg: ''
+      errMsg: '',
+      //showListengredientComponent: false
     };
 
     this.inputHandler = this.inputHandler.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.addItem = this.addItem.bind(this);
   }
+
 
   inputHandler(e) {
     this.setState({serchInput: e.target.value});
@@ -32,7 +34,8 @@ class Search extends React.Component {
       this.setState({
         listIngredients: [...listIngredients, serchInput],
         serchInput: '',
-        errMsg: ''
+        errMsg: '',
+        showListengredientComponent: false
       });
     } else {
       this.setState({errMsg: `${serchInput} is not a valid ingredient :(`});
@@ -64,12 +67,12 @@ class Search extends React.Component {
           />
           <input onClick={this.addItem} type='submit' value = 'Add'/>
           <span>{this.state.errMsg}</span>
-        </form>
-        <IngredientList
-          onRoute={this.props.onRoute}
-          onRemove={this.removeItem}
-          ingredients={this.state.listIngredients}
-        />
+          </form>
+           <IngredientList
+            onRoute={this.props.onRoute}
+            onRemove={this.removeItem}
+            ingredients={this.state.listIngredients}
+            />
       </div>
     )
   }
