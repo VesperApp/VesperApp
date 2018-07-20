@@ -11,30 +11,29 @@ import ResultsList from './components/ResultsList.jsx';
 import IngredirentList from './components/IngredientList.jsx';
 import FavoriteList from './components/FavoriteList.jsx';
 
-
-
-const ROUTE = {
-  LOGIN: 'LOGIN',
-  SIGNUP: 'SIGNUP',
-  SEARCH: 'SEARCH',
-  FAVORITE: 'FAVORITE'
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: null,
       validIngredients: [],
       drinks: [],
-      user: user
+      user: user,
+      search: true,
+      resultList: false
     }
     this.removeFavDrink = this.removeFavDrink.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
   componentDidMount() {
     this.fetchValidIngredients();
     this.fetchDrinks();
+  }
+
+  showSearchComponent() {
+    this.setState({
+      search: !this.state.search
+    });
   }
 
   fetchValidIngredients() {
@@ -49,8 +48,16 @@ class App extends React.Component {
          .catch((err) => console.log(err));
   }
 
-  route(path) {
-    this.setState({route: path});
+  handleSearchSubmit(e, ingredients) {
+    console.log(ingredients);
+    const postData = ingredients.reduce((obj, ingre) => {
+      obj[ingre] = 1;
+      return obj;
+    }, {});
+    console.log(postData);
+    axios.post('/drinksByIngredient', postData)
+         .then((res) => console.log(res))
+         .catch((err) => console.log(err));
   }
 
   removeFavDrink(e, drink) {
@@ -78,11 +85,15 @@ class App extends React.Component {
   }
 
   render() {
+    const {search, resultList, drinks} = this.state;
+    const SearchComponent = (<Search
+      handleSearchSubmit={this.handleSearchSubmit}
+      validIngredients={this.state.validIngredients}/>);
     return (
       <div className="main">
         <Header/>
-        <Search onRoute={this.route.bind(this)} validIngredients={this.state.validIngredients}/>
-        <ResultsList drinks={this.state.drinks}/>
+        {search ? SearchComponent : ''}
+        {resultList ? <ResultsList drinks={drinks}/> : ''}
         <FavoriteList onRemove={this.removeFavDrink} user={this.state.user}/>
       </div>
     )
