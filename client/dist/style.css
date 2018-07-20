@@ -211,7 +211,15 @@ body {
   color: #999;
 }
 
-
+.userName{
+    padding: 10px;
+    width: auto;
+    float: left;;
+    margin: 5px;
+    font-size:17px;
+    border-radius: 6px;
+    color: #336699;
+}
 .putRigth{
     width:30px;
     height:30px;
@@ -285,6 +293,7 @@ body {
     margin-top: 2%;
 }
 /*  display: none; */
+
 .resulView{
     position: fixed;
     display: none;

@@ -10,10 +10,35 @@ class Header extends React.Component {
     this.state = {
       login : false,
       sign : false,
-      logoutBtn : false
+      logoutBtn : false,
+      user : false,
+      userinfo: {}
     }
     this.showLoginComponent = this.showLoginComponent.bind(this);
     this.showSignUp = this.showSignUp.bind(this);
+    this.logOut = this.logOut.bind(this);
+    
+  }
+  componentDidMount(){
+    var user = localStorage.getItem("users");
+    if(user){
+      var objUser = JSON.parse(user)
+    }
+    
+    console.log(user)
+    console.log("Json data",objUser)
+
+    if(user != null){
+      this.setState({
+        user : true,
+        userinfo : objUser
+      })
+    }else{
+      this.setState({
+        user : false,
+        userinfo : {}
+      })
+    }
   }
   showLoginComponent(){
     this.setState({
@@ -28,6 +53,17 @@ class Header extends React.Component {
     })
   }
 
+  logOut(){
+    window.localStorage.removeItem("users");
+    //location.reload();
+    this.setState({
+      login : false,
+      sign : false,
+      logoutBtn : false,
+      user : false,
+      userinfo: {}
+    })
+  }
 
   render () {
       return(
@@ -40,17 +76,32 @@ class Header extends React.Component {
               Vesper
             </div>
             <div className="boxBtn">
-              <div className="login btn" onClick={this.showLoginComponent} >
-                Login
-              </div>
-              <div className="sign btn" onClick={this.showSignUp}>
-                Sign up
-              </div>
-              {this.state.logoutBtn === true ?
-              <div className="logout btn">
-                Log out
-              </div> : null
-            }
+              {
+                this.state.user == true ? null :  
+                <div className="login btn" onClick={this.showLoginComponent} >
+                  Login
+                </div>
+              }
+              {
+               this.state.user == true  ? null :  
+                <div className="sign btn" onClick={this.showSignUp}>
+                  Sign up
+                </div>
+              }
+              {
+               this.state.user != true  ? null :  
+                <div className="userName">
+                {
+                 this.state.userinfo.email 
+                }
+                </div>
+              }
+              {
+                this.state.user != true ? null :  
+                <div className="logout btn" onClick={this.logOut}>
+                  Log out
+                </div>
+              }
             </div>
         </div>
 

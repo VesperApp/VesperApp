@@ -71,6 +71,5 @@ module.exports = User;
 
 /*
 new schema
-
 const userSchema = mongoose.Schema({   name: {type: String, unique: true, trim: true},   password: String,   email:{     type: String,     required: true,     unique : true,     trim: true   },   favDrinks: [] });
 */
