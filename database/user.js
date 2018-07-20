@@ -31,24 +31,20 @@ User.register = (req, cb) => {
 // TODO: Find specific user's favorite drinks and attach drink object to favDrinks array
 User.findFavDrinks = (query, callback) => {
   // check to see if MongoIDkey  is unique
+}
 
-  User.findById(query._id, (err, data) => {
-    if (err) {
-      throw err;
+
+User.login = (req, cb) => {
+  let username = req.body.username;
+
+  User.find({name: username}, function(err, data){
+    if(err) {
+      cb(err,null);
     } else {
-      // use .set() to modify docs
-      User.set({ favDrinks: []})
-      User.save( (err, update) => {
-        if(err) {
-          throw err;
-        } else {
-          res.send(update);
-        }
-      })
-      callback(null, data)
+      cb(null, data);
     }
   })
-};
+}
 
 // User.addFavDrink = (query, callback) {}
 
@@ -68,6 +64,7 @@ User.removeFavDrinks = (query, callback) => {
 
 
 module.exports = User;
+
 
 /*
 new schema

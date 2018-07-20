@@ -39,15 +39,7 @@ class App extends React.Component {
 
   fetchValidIngredients() {
     axios.get('/ingredients')
-         .then((res) => {
-           // change all keys to uppercase
-           // const newData = {}
-           // for (let key in res.data) {
-           //   let newKey = key.toUpperCase();
-           //   newData[newKey] = res.data[key];
-           // }
-           this.setState({validIngredients: res.data});
-         })
+         .then((res) => this.setState({validIngredients: res.data}))
          .catch((err) => console.log(err));
   }
 
