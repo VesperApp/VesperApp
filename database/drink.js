@@ -55,9 +55,27 @@ Drink.findAll = (callback) => {
 
 
 // TODO: Return drinks that match exactly with given ingredients
-Drink.selectDrinkByigredients = function(query,callback){
-    // ingredients is an object
-    Drink.find(query,function(err,drinks){
+Drink.selectDrinkByigredients = function(ingredientsArray,callback){
+
+    ingredientsArray.push("");
+
+    Drink.find({
+      strIngredient1: {$in: ingredientsArray},
+      strIngredient2: {$in: ingredientsArray},
+      strIngredient3: {$in: ingredientsArray},
+      strIngredient4: {$in: ingredientsArray},
+      strIngredient5: {$in: ingredientsArray},
+      strIngredient6: {$in: ingredientsArray},
+      strIngredient7: {$in: ingredientsArray},
+      strIngredient8: {$in: ingredientsArray},
+      strIngredient9: {$in: ingredientsArray},
+      strIngredient10: {$in: ingredientsArray},
+      strIngredient11: {$in: ingredientsArray},
+      strIngredient12: {$in: ingredientsArray},
+      strIngredient13: {$in: ingredientsArray},
+      strIngredient14: {$in: ingredientsArray},
+      strIngredient15: {$in: ingredientsArray},
+    },function(err,drinks){
       if(err){
         console.log("Find an error",err);
         callback(null, error)
@@ -77,3 +95,7 @@ Drink.migrate = (callback) => {
 }
 
 module.exports = Drink;
+
+Drink.selectDrinkByigredients(["Vodka","Gin","Ice","Lime juice cordial"],function(err,data){
+  console.log(data);
+});
