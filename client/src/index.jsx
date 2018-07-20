@@ -39,7 +39,7 @@ class App extends React.Component {
 
   fetchValidIngredients() {
     axios.get('/ingredients')
-         .then((res) => this.setState({validIngredients: res.data[0]}))
+         .then((res) => this.setState({validIngredients: res.data}))
          .catch((err) => console.log(err));
   }
 

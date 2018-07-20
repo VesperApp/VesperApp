@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
@@ -16,6 +15,12 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
+
 // GET: return all drinks
 app.get('/drinks', (req, res) => {
 
@@ -27,7 +32,6 @@ app.get('/drinks', (req, res) => {
       res.status(200).send(drinks);
     }
   });
-
 });
 
 // GET: return all drinks by ingredient list
@@ -35,12 +39,12 @@ app.post('/drinksByIngredient', (req, res) => {
  // var qr = req.body // to get the params
  // how ll got value in the get method ?
 
-  var q = {strDrink:/155 Belm/ } // like
-  drink.selectDrinkByigredients(q, function(err, data){
+  // var q = {ind:/155 Belm/ } // like
+  drink.selectDrinkByigredients(req.body.keys(), function(err, data){
     if(err){
-      console.log("The error", error)
+      console.log("QUERY error", error)
     }else{
-      console.log("the data form database",data)
+      console.log("the drinks returned from the database", data)
       res.send(data)
     }
   })
@@ -87,10 +91,6 @@ app.post('/user', (req, res) => {
   })
 })
 
-// TODO: POST: return drinks by given ingredients
-app.post('/drinks', (req, res) => {});
-
-
 
 // TODO: GET: return all ingredients
 app.get('/ingredients', (req, res) => {
@@ -103,6 +103,7 @@ app.get('/ingredients', (req, res) => {
   });
 });
 
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
@@ -112,27 +113,34 @@ app.listen(3000, function() {
 // Authentication routes here
 /************************************************************/
 
-app.post('/signup',function(req,res) {
+//on signup - req should include:
+// req.body.username
+// req.body.password
+// req.body.email
 
+
+app.post('/signup',function(req,res) {
   //create a hash:
   bcrypt.hash(req.body.password, 1, function(err, hash) {
-
     //reset the req password as the hash
     req.body.password = hash;
-
     //send req to save user to database
     user.register(req,function(err,data) {
       if(err) {
         res.send(err);
       } else {
-        res.send(data);
+        createSession(req,res,req.body.username);
       }
     })
-
   });
-
 })
 
+
+//on login - req should include:
+// req.body.username
+// req.body.password
+
+//route login will return true/false given username/password
 
 app.post('/login', function(req,res) {
   user.login(req, function(err,data) {
@@ -142,14 +150,45 @@ app.post('/login', function(req,res) {
     } else {
       bcrypt.compare(req.body.password, data[0].password, function(err, bcryptRes) {
           if(err) {
-            console.log("BCRYPT ERR")
+            console.log("BCRYPT ERR: ", err)
             res.send(err);
           } else {
-            console.log("BCRYPT RES: ", bcryptRes)
-            res.send(bcryptRes);
+            if(bcryptRes) {
+              createSession(req,res,req.body.username)
+            } else {
+              console.log("BCRYPT RES: ", bcryptRes)
+              res.send(bcryptRes);
+            }
           }
-      });
+      })
     }
   })
 })
 
+app.get('/logout', function(req, res) {
+  req.session.destroy(function(err) {
+  // cannot access session here
+  if(err) {
+    console.log("Logout ERROR: ", err);
+  }
+    res.send('session deleted. logged out');
+  })
+})
+
+//create a session:
+var createSession = function(req, res, userName) {
+  req.session.regenerate(function(err) {
+  // will have a new session here
+    req.session.user = userName;
+    res.send("Session created");
+  })
+};
+
+//check if session is valid:
+var checkSession = function(req, res, next) {
+  if(req.session.user) {
+    next();
+  } else {
+    res.send("ERROR: need to login");
+  }
+}
