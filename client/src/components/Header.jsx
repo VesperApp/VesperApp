@@ -97,6 +97,12 @@ class Header extends React.Component {
                 }
                 </div>
               }
+               {
+               this.state.user != true  ? null :  
+                <div className="userName favorite">
+                 My Favoris
+                </div>
+              }
               {
                 this.state.user != true ? null :  
                 <div className="logout btn" onClick={this.logOut}>
