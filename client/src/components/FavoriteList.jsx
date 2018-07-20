@@ -36,14 +36,16 @@ class FavoriteList extends React.Component {
     return (
       <div>
         <div className="listView">
+          <div className="fav">
+            <h4>
+              User favoris should show after login also the result component have been hide
+            </h4>
+          </div>
           <table className="table table-hover " >
 
             <thead>
               <tr>
-               <div className="fav">
-               <h4>
-                User favoris should show after login also the result component have been hide
-                </h4> </div>
+
               </tr>
               <tr>
                 <th scope="col">#</th>
