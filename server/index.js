@@ -1,10 +1,9 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const drink  = require('../database/drink.js');
+const user  = require('../database/user.js');
 const ingredient  = require('../database/ingredient.js');
-
-const user = require('../database/user.js')
-const bcrypt = require('bcrypt');
 const session = require('express-session');
 
 let app = express();
@@ -24,13 +23,13 @@ app.use(session({
 app.get('/drinks', (req, res) => {
 
   drink.findAll((err, drinks) => {
+
     if (err) {
       res.status(500).send("GET /drinks failed");
     } else {
       res.status(200).send(drinks);
     }
   });
-
 });
 
 // GET: return all drinks by ingredient list
@@ -38,7 +37,7 @@ app.post('/drinksByIngredient', (req, res) => {
  // var qr = req.body // to get the params
  // how ll got value in the get method ?
 
-  var q = {strDrink:/155 Belm/ } // like
+  var q = {ind:/155 Belm/ } // like
   drink.selectDrinkByigredients(q, function(err, data){
     if(err){
       console.log("The error", error)
@@ -67,10 +66,30 @@ app.post('/data/reset', (req, res) => {
   });
 });
 
+//TODO: POST: add a favorite drink
+app.post('/user', (req,res) => {
+  user.findFavDrinks(req.body, (err ,data) => {
+    if (err) {
+      console.log("POST /add favoriteDrink failed");
+    } else {
+      res.send(data);
+    }
+  });
+})
+
+//TODO: POST: remove a favorite drink
+app.post('/user', (req, res) => {
+  user.removeFavDrinks(req.body , (err, data) => {
+    if (err) {
+      console.log('Post /remove favoriteDrink failed')
+    } else {
+      res.send(data);
+    }
+  })
+})
+
 // TODO: POST: return drinks by given ingredients
 app.post('/drinks', (req, res) => {});
-
-
 
 // TODO: GET: return all ingredients
 app.get('/ingredients', (req, res) => {
@@ -82,6 +101,7 @@ app.get('/ingredients', (req, res) => {
     }
   });
 });
+
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
@@ -97,6 +117,7 @@ app.listen(3000, function() {
 // req.body.password
 // req.body.email
 
+
 app.post('/signup',function(req,res) {
   //create a hash:
   bcrypt.hash(req.body.password, 1, function(err, hash) {
@@ -107,17 +128,19 @@ app.post('/signup',function(req,res) {
       if(err) {
         res.send(err);
       } else {
-        res.send(data);
+        createSession(req,res,req.body.username);
       }
     })
   });
 })
+
 
 //on login - req should include:
 // req.body.username
 // req.body.password
 
 //route login will return true/false given username/password
+
 app.post('/login', function(req,res) {
   user.login(req, function(err,data) {
     if(err) {
