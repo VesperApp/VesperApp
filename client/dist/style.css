@@ -78,7 +78,7 @@ body {
 .resultListView{
     position: relative;
     background:#fff;
-    width:100%;
+    width:50%;
     box-shadow:0px 0px 10px #ccc;
     height:auto;
     margin: auto;
@@ -297,12 +297,12 @@ body {
 .resulView{
     position: absolute;
     display: block;
+    top:0;
     background:rgba(255,255,255,0.7);
-    width:500px;
+    width:100%;
     box-shadow:0px 0px 1px #ccc;
-    height:300px;
+    height:100%;
     margin: auto;
-    margin-left: 20%;
     padding: 2%;
     padding-top: 10%;
     z-index: 2;
@@ -340,6 +340,20 @@ body{
     margin-top: 18px;
     color: #fff;
     font-family: inherit;
+}
+.favorite{
+    background:green;
+    padding: 10px;
+    width: auto;
+    float: left;;
+    margin: 5px;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.favorite:hover{
+    cursor: pointer;
+    box-shadow:0p 0px 4px #ccc;
 }
 
 .boxBtn{
