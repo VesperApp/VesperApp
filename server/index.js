@@ -5,13 +5,13 @@ const drink  = require('../database/drink.js');
 const user  = require('../database/user.js');
 const ingredient  = require('../database/ingredient.js');
 
-const user = require('../database/user.js')
+// const user = require('../database/user.js')
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 
 let app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true, useNewUrlParser: true }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -64,13 +64,14 @@ app.post('/data/reset', (req, res) => {
   });
 });
 
-//TODO: POST: add a favorite drink
+//TODO: POST: add a favorite drink , someone clicks like then:
 app.post('/user', (req,res) => {
+  console.log('req is', req.body);
   user.findFavDrinks(req.body, (err ,data) => {
     if (err) {
       console.log("POST /add favoriteDrink failed");
     } else {
-      res.send(data);
+      res.send(req.body);
     }
   });
 })
