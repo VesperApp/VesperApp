@@ -52,7 +52,7 @@ User.findFavDrinks = (query, callback) => {
 
 
 User.login = (req, cb) => {
-  let username = req.body.username;
+  let username = req.body.name;
 
   User.find({name: username}, function(err, data){
     if(err) {
@@ -77,6 +77,5 @@ module.exports = User;
 
 /*
 new schema
-
 const userSchema = mongoose.Schema({   name: {type: String, unique: true, trim: true},   password: String,   email:{     type: String,     required: true,     unique : true,     trim: true   },   favDrinks: [] });
 */

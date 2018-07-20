@@ -27,7 +27,8 @@ class App extends React.Component {
       route: null,
       validIngredients: [],
       drinks: [],
-      user: user
+      user: user, 
+      favComponent: false
     }
     this.removeFavDrink = this.removeFavDrink.bind(this);
   }
@@ -83,7 +84,12 @@ class App extends React.Component {
         <Header/>
         <Search onRoute={this.route.bind(this)} validIngredients={this.state.validIngredients}/>
         <ResultsList drinks={this.state.drinks}/>
-        <FavoriteList onRemove={this.removeFavDrink} user={this.state.user}/>
+        {
+          // when a user click on favoris see that block 
+          this.state.favComponent === true? 
+          <FavoriteList onRemove={this.removeFavDrink} user={this.state.user}/>: null
+        }
+       
       </div>
     )
   }
