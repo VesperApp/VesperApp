@@ -1,7 +1,7 @@
 import React from 'react';
 
 const IngredientList = (props) => {
-  const {ingredients} = props;
+  const {ingredients, onSubmit} = props;
   const IngredientItems = ingredients.map((ingredient, i) =>
     <div className="item" key={i}>
       <span>{ingredient}</span>
@@ -19,7 +19,7 @@ const IngredientList = (props) => {
         This is the selected IngredientList component
       </div>
       {IngredientItems}
-      <input type="submit" value="Submit"/>
+      <input onClick={(e) => onSubmit(e, ingredients)} type="submit" value="Submit"/>
     </div>
   )
 }

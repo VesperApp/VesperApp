@@ -27,12 +27,22 @@ class Search extends React.Component {
     e.preventDefault();
 
     let {listIngredients, serchInput} = this.state;
-    serchInput = serchInput.trim();
+    serchInput = serchInput.trim().toUpperCase();
 
-    const isValid = this.props.validIngredients[serchInput];
+    // using loop because we need to turn keys into uppercase
+    let isValid = false;
+    let addedIngre = null;
+    for (let ingre in this.props.validIngredients) {
+      if (ingre.toUpperCase() === serchInput) {
+        isValid = true;
+        addedIngre = ingre;
+        break;
+      }
+    }
+
     if (isValid) {
       this.setState({
-        listIngredients: [...listIngredients, serchInput],
+        listIngredients: [...listIngredients, addedIngre],
         serchInput: '',
         errMsg: '',
         showListengredientComponent: false
@@ -53,6 +63,8 @@ class Search extends React.Component {
   }
 
   render() {
+    const {serchInput, listIngredients} = this.state;
+    const {handleSearchSubmit} = this.props;
     return (
       <div className="search">
         <form className="searchView">
@@ -63,16 +75,16 @@ class Search extends React.Component {
             onChange={this.inputHandler}
             type='text'
             placeholder='rum'
-            value={this.state.serchInput}
+            value={serchInput}
           />
           <input onClick={this.addItem} type='submit' value = 'Add'/>
           <span>{this.state.errMsg}</span>
           </form>
-           <IngredientList
-            onRoute={this.props.onRoute}
+          <IngredientList
+            onSubmit={handleSearchSubmit}
             onRemove={this.removeItem}
-            ingredients={this.state.listIngredients}
-            />
+            ingredients={listIngredients}
+          />
       </div>
     )
   }

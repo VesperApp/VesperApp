@@ -12,11 +12,11 @@ https://app.moqups.com/edai/Pkc8xLkcty/edit/page/ad64222d5
     [X] create  [Login] component
     [X] create input [SignUp] component
 
-  [x] create user [Search] input component
-    [] create selected [IngredientList] component/submit button
+  [X] create user [Search] input component
+    [X] create selected [IngredientList] component/submit button
 
-  [] create cocktail [ResultsList] component / user [FavoriteList] component
-    [] create  [CocktailDetails] component
+  [X] create cocktail [ResultsList] component / user [FavoriteList] component
+    [X] create  [CocktailDetails] component
 
   [] create input [Footer] component
 

@@ -31,14 +31,14 @@ class ResultsList extends React.Component {
     return (
       <div>
         <div className="resulView">
+        close
         <div className="resultListView">
-          .. <div>
+              <div>
                 <h2> Result by ingredients </h2>
               </div>
           <table className="table table-hover " >
 
             <thead>
-
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Drink Name</th>

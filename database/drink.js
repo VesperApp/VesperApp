@@ -56,9 +56,9 @@ Drink.findAll = (callback) => {
 
 // TODO: Return drinks that match exactly with given ingredients
 Drink.selectDrinkByigredients = function(ingredientsArray,callback){
-
+    //add an empty space to query
     ingredientsArray.push("");
-
+    //search query
     Drink.find({
       strIngredient1: {$in: ingredientsArray},
       strIngredient2: {$in: ingredientsArray},
@@ -97,6 +97,6 @@ Drink.migrate = (callback) => {
 module.exports = Drink;
 
 //Query test:
-// Drink.selectDrinkByigredients(["Vodka","Gin","Ice","Lime juice cordial"],function(err,data){
+// Drink.selectDrinkByigredients(["Dark rum","Light rum","Vodka","Orange juice"],function(err,data){
 //   console.log(data);
 // });
