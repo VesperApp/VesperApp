@@ -70,8 +70,8 @@ app.post('/data/reset', (req, res) => {
 
 //TODO: POST: add a favorite drink , someone clicks like then:
 app.post('/user', (req,res) => {
-  console.log('req is', req.body);
-  user.findFavDrinks(req.body, (err ,data) => {
+  console.log('req is', req);
+  user.addFavDrink(req.body, (err ,data) => {
     if (err) {
       console.log("POST /add favoriteDrink failed");
     } else {
