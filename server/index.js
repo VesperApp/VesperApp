@@ -74,6 +74,7 @@ app.post('/user', (req,res) => {
     if (err) {
       console.log("POST /add favoriteDrink failed");
     } else {
+      console.log("add fav drink post sent ");
       res.send(req.body);
     }
   });

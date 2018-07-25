@@ -47,7 +47,7 @@ User.register = (req, cb) => {
 //     });
 //   })
 // };
-//=======
+
 
 User.findFavDrinks = (query, callback) => {
   // check to see if MongoIDkey  is unique
@@ -66,6 +66,7 @@ User.findFavDrinks = (query, callback) => {
     });
   })
 };
+
 
 // User.findFavDrinks();
 
