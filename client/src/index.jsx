@@ -51,7 +51,6 @@ class App extends React.Component {
 
     axios.post('/drinksByIngredient', postData)
          .then((res) => {
-           console.log(res);
            this.setState({
              drinks:res.data,
              resultList: true

@@ -9,15 +9,15 @@ class Header extends React.Component {
     super(props)
     this.state = {
       login : false,
-      sign : false,
+      signUp : false,
       logoutBtn : false,
       user : false,
       userinfo: {}
     }
     this.showLoginComponent = this.showLoginComponent.bind(this);
     this.showSignUp = this.showSignUp.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.logOut = this.logOut.bind(this);
-    
   }
   componentDidMount(){
 
@@ -44,13 +44,13 @@ class Header extends React.Component {
   showLoginComponent(){
     this.setState({
       login : true,
-      sign : false
+      signUp : false
     })
   }
   showSignUp(){
     this.setState({
       login : false,
-      sign : true
+      signUp : true
     })
   }
 
@@ -59,11 +59,19 @@ class Header extends React.Component {
     //location.reload();
     this.setState({
       login : false,
-      sign : false,
+      signUp : false,
       logoutBtn : false,
       user : false,
       userinfo: {}
-    })
+    });
+  }
+
+  handleClose(popUpName) {
+    if (popUpName === SignUp.name) {
+      this.setState({signUp: false});
+    } else if (popUpName === Login.name) {
+      this.setState({login: false});
+    }
   }
 
   render () {
@@ -114,10 +122,10 @@ class Header extends React.Component {
 
         <div className="insertComponent">
           <div>
-            {this.state.login ===true ?  <Login/> : null}
+            {this.state.login === true ?  <Login onClose={this.handleClose}/> : null}
           </div>
           <div>
-            {this.state.sign ===true ?  <SignUp/> : null}
+            {this.state.signUp === true ?  <SignUp onClose={this.handleClose}/> : null}
           </div>
         </div>
       </div>
