@@ -42,7 +42,6 @@ class FavoriteList extends React.Component {
             </h4>
           </div>
           <table className="table table-hover " >
-
             <thead>
               <tr>
               </tr>
