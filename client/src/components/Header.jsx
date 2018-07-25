@@ -66,10 +66,10 @@ class Header extends React.Component {
     });
   }
 
-  handleClose(popUpName) {
-    if (popUpName === SignUp.name) {
+  handleClose(popupName) {
+    if (popupName === SignUp.name) {
       this.setState({signUp: false});
-    } else if (popUpName === Login.name) {
+    } else if (popupName === Login.name) {
       this.setState({login: false});
     }
   }
