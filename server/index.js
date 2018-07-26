@@ -103,7 +103,7 @@ app.get('/ingredients', (req, res) => {
 });
 
 
-app.listen(5000, function() {
+app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
