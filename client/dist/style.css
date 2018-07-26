@@ -419,6 +419,19 @@ body{
     box-shadow: 0px 0px 2px #336699;
 }
 
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height:4%;
+    width: 100%;
+    background-color: #C3D3F7;
+    color: grey;
+    line-height: -100%;
+    text-align: center;
+    opacity: 0.8;
+    font-size: 18px;
+}
 
 
 
