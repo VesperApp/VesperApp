@@ -42,7 +42,7 @@ User.login = (req, cb) => {
 }
 
 User.addFavDrink = (postData, cb) => {
-  const {username, drink} = postData;
+  const { username, drink } = postData;
   User.findOneAndUpdate({name: username},
     {$push: {favDrinks: drink}},
     function (err, data) {
@@ -57,9 +57,21 @@ User.addFavDrink = (postData, cb) => {
   });
 };
 
-User.removeFavDrinks = (query, callback) => {
+User.removeFavDrinks = (postData, cb) => {
   // locate the correct drink in favDrinksArray
-  User.update({"_id": req.body._id}, {"$pull": {favDrinks: {_id:req.body._id}}})
+  const { username, drink } = postData;
+  User.findOneAndUpdate({name: username},
+    {$pull: {favDrinks: drink}},
+    function (err, data) {
+      if (err) {
+        console.log("err on removeFavDrink ");
+        cb(err, null);
+      } else {
+        console.log("Sucess");
+        console.log("fav drinks array is ", data.favDrinks);
+        cb(null, data.favDrinks);
+      }
+  }); 
 }
 
 module.exports = User;
