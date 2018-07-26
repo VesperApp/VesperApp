@@ -196,3 +196,6 @@ var checkSession = function(req, res, next) {
     res.send("ERROR: need to login");
   }
 }
+
+// for jest testing
+module.exports = app;
