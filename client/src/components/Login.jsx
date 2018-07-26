@@ -13,12 +13,11 @@ class Login extends React.Component {
     console.log( stringifyFormData(data))
     var dataToSend = stringifyFormData(data)
     $.ajax({
-        url: 'http://127.0.0.1:3000/login',
+        url: '/login',
         type: 'POST',
         data:dataToSend,
         contentType: 'application/json',
         success: function (data) {
-            console.log("See data", data)
             if(data === true ){
                 location.reload();
                 // use local storage 
@@ -29,7 +28,8 @@ class Login extends React.Component {
             }
         },
         error: function (error) {
-          console.error('Omg my god', error.responseText);
+          console.error('Ajax error', error.responseText);
+          alert("Error login ")
         }
     });
 }
@@ -45,7 +45,7 @@ class Login extends React.Component {
         <form  onSubmit={this.handleSubmit}>
           <div className="title">Login</div>
           <input type='text' name='name' placeholder=" Your username" />
-          <input type='text' name='password' placeholder=" Your password" />
+          <input type='password' name='password' placeholder=" Your password" />
           <input type="submit" value="Login"/>
         </form>
       </div>
