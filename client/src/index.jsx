@@ -11,6 +11,7 @@ import ResultsList from './components/ResultsList.jsx';
 import IngredirentList from './components/IngredientList.jsx';
 import FavoriteList from './components/FavoriteList.jsx';
 import CocktailDetails from './components/CocktailDetails.jsx';
+import Footer from './components/Footer.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -109,6 +110,7 @@ class App extends React.Component {
         {search ? SearchComponent : ''}
         {resultList ? <ResultsList drinks={drinks} onClose={this.handleClose}/> : ''}
         {favComponent ? <FavoriteList onRemove={this.removeFavDrink} user={user}/> : ''}
+        <Footer/>
       </div>
     )
   }
