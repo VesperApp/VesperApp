@@ -28,49 +28,6 @@ User.register = (req, cb) => {
   });
 };
 
-// TODO: Find specific user's favorite drinks and attach drink object to favDrinks array
-
-// User.findFavDrinks = (query, callback) => {
-//   // check to see if MongoIDkey  is unique
-//   User.findById("5b50f96602b1850bd2fff872", (err, drink) => { // just use find?
-//   // User.findById(req._id, (err, drink) => {
-//     if(err) {console.log('there is an ', err)};
-//     console.log('drink is', drink);
-//     drink.name = 'joeytest';
-//     drink.favDrinks[1] = 'secondTestDrink'
-//     drink.save(function(err, favDrink) {
-//       if(err) {
-//         console.log('the save did not work', err);
-//       } else {
-//         // res.send(favDrink) // error saying res not defined??
-//       }
-//     });
-//   })
-// };
-
-
-User.findFavDrinks = (query, callback) => {
-  // check to see if MongoIDkey  is unique
-  User.findById("5b50f96602b1850bd2fff872", (err, drink) => { // just use find?
-  // User.findById(req._id, (err, drink) => {
-    if(err) {console.log('there is an ', err)};
-    console.log('drink is', drink);
-    drink.name = 'joeytest';
-    drink.favDrinks[1] = 'secondTestDrink'
-    drink.save(function(err, favDrink) {
-      if(err) {
-        console.log('the save did not work', err);
-      } else {
-        // res.send(favDrink) // error saying res not defined??
-      }
-    });
-  })
-};
-
-
-// User.findFavDrinks();
-
-
 
 User.login = (req, cb) => {
   let username = req.body.name;
@@ -84,22 +41,38 @@ User.login = (req, cb) => {
   })
 }
 
-User.addFavDrink = (query, cb) => {
-  User.findByIdAndUpdate(_id,
-    {$push: {favDrinks: req.body}},
+User.addFavDrink = (postData, cb) => {
+  const { username, drink } = postData;
+  User.findOneAndUpdate({name: username},
+    {$push: {favDrinks: drink}},
     function (err, data) {
+      if (err) {
+        console.log("err on addFavDrink ");
+        cb(err, null);
+      } else {
+        console.log("Sucess");
+        console.log("fav drinks array is ", data.favDrinks);
+        cb(null, data.favDrinks);
+      }
+  });
+};
 
-  })
-}
-
-// User.addFavDrink = (query, callback) {}
-
-User.removeFavDrinks = (query, callback) => {
+User.removeFavDrinks = (postData, cb) => {
   // locate the correct drink in favDrinksArray
-  User.update({"_id": req.body._id}, {"$pull": {favDrinks: {_id:req.body._id}}})
-
+  const { username, drink } = postData;
+  User.findOneAndUpdate({name: username},
+    {$pull: {favDrinks: drink}},
+    function (err, data) {
+      if (err) {
+        console.log("err on removeFavDrink ");
+        cb(err, null);
+      } else {
+        console.log("Sucess");
+        console.log("fav drinks array is ", data.favDrinks);
+        cb(null, data.favDrinks);
+      }
+  }); 
 }
-
 
 module.exports = User;
 

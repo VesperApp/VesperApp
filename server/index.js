@@ -68,28 +68,27 @@ app.post('/data/reset', (req, res) => {
 });
 
 //TODO: POST: add a favorite drink , someone clicks like then:
-app.post('/user', (req,res) => {
-  console.log('req is', req);
-  user.addFavDrink(req.body, (err ,data) => {
+app.post('/user/addFavDrink', (req, res) => {
+  user.addFavDrink(req.body, (err, data) => {
     if (err) {
       console.log("POST /add favoriteDrink failed");
     } else {
       console.log("add fav drink post sent ");
-      res.send(req.body);
+      res.status(200).send(data);
     }
   });
-})
+});
 
 //TODO: POST: remove a favorite drink
-app.post('/user', (req, res) => {
+app.post('/user/removeFavDrink', (req, res) => {
   user.removeFavDrinks(req.body , (err, data) => {
     if (err) {
-      console.log('Post /remove favoriteDrink failed')
+      console.log("Post removeFavDrink failed");
     } else {
-      res.send(data);
+      res.status(200).send(data);
     }
-  })
-})
+  });
+});
 
 
 // TODO: GET: (DEBUGGER route) return all ingredients
