@@ -15,7 +15,7 @@ class FakeFavorisdrink extends React.Component {
         <div className="formView">
           <div className="fav">
             <div className="title">
-               {JSON.parse(localStorage.getItem("users")).name}'s favoris drink 
+               User 's favoris drink 
             </div>
           </div>
           <table className="table table-hover " >

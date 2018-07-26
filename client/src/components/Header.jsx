@@ -74,6 +74,7 @@ class Header extends React.Component {
       signUp : false,
       logoutBtn : false,
       user : false,
+      favComponent : false,
       userinfo: {}
     });
   }
