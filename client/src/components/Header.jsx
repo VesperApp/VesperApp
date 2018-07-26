@@ -3,7 +3,7 @@ import React from 'react';
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
 import Search from './Search.jsx';
-
+import FakeFavorisdrink from './FakeFavorisdrink.jsx';
 class Header extends React.Component {
   constructor(props){
     super(props)
@@ -12,12 +12,15 @@ class Header extends React.Component {
       signUp : false,
       logoutBtn : false,
       user : false,
+      favComponent:false,
       userinfo: {}
     }
     this.showLoginComponent = this.showLoginComponent.bind(this);
     this.showSignUp = this.showSignUp.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.showFavoris = this.showFavoris.bind(this);
+    
   }
   componentDidMount(){
 
@@ -26,9 +29,6 @@ class Header extends React.Component {
       var objUser = JSON.parse(user)
     }
     
-    console.log(user)
-    console.log("Json data",objUser)
-
     if(user != null){
       this.setState({
         user : true,
@@ -54,6 +54,18 @@ class Header extends React.Component {
     })
   }
 
+  showFavoris(){  
+    if(this.state.favComponent===true){
+      this.setState({
+        favComponent : false
+      })
+    }else{
+      this.setState({
+        favComponent : true
+      })
+    }
+  }
+
   logOut(){
     window.localStorage.removeItem("users");
     //location.reload();
@@ -62,6 +74,7 @@ class Header extends React.Component {
       signUp : false,
       logoutBtn : false,
       user : false,
+      favComponent : false,
       userinfo: {}
     });
   }
@@ -82,7 +95,7 @@ class Header extends React.Component {
             <img src = "http://www.finsmes.com/wp-content/uploads/2018/05/vesper.png" width="150px" className="logo"/>
             </div>
             <div className= "appName">
-              Vesper
+            Andy's Tropical Beach Party
             </div>
             <div className="boxBtn">
               {
@@ -107,7 +120,7 @@ class Header extends React.Component {
               }
                {
                this.state.user != true  ? null :  
-                <div className="userName favorite">
+                <div className="userName favorite" onClick={this.showFavoris}>
                  My Favoris
                 </div>
               }
@@ -127,12 +140,12 @@ class Header extends React.Component {
           <div>
             {this.state.signUp === true ?  <SignUp onClose={this.handleClose}/> : null}
           </div>
+          <div>
+           { this.state.favComponent === true  ? <FakeFavorisdrink /> : null} 
+          </div>
         </div>
       </div>
     )
   }
 }
 export default Header;
-
-//add Login component
-//add Sign up component
