@@ -10,6 +10,8 @@ import Search from './components/Search.jsx';
 import ResultsList from './components/ResultsList.jsx';
 import IngredirentList from './components/IngredientList.jsx';
 import FavoriteList from './components/FavoriteList.jsx';
+import CocktailDetails from './components/CocktailDetails.jsx';
+import Footer from './components/Footer.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class App extends React.Component {
     }
     this.removeFavDrink = this.removeFavDrink.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +46,10 @@ class App extends React.Component {
   }
 
   handleSearchSubmit(e, ingredients) {
+    if (!ingredients.length) {
+      return;
+    }
+    
     let drinks = [];
     const postData = ingredients.reduce((obj, ingre) => {
       obj[ingre] = 1;
@@ -57,6 +64,12 @@ class App extends React.Component {
            });
          })
          .catch((err) => console.log(err));
+  }
+
+  handleClose(popupName) {
+    if (popupName === ResultsList.name) {
+      this.setState({resultList: false});
+    }
   }
 
   removeFavDrink(e, drink) {
@@ -84,18 +97,20 @@ class App extends React.Component {
   }
 
   render() {
-    const {user, search, resultList, drinks, favComponent} = this.state;
-    const SearchComponent = (<Search
-      handleSearchSubmit={this.handleSearchSubmit}
-      validIngredients={this.state.validIngredients}/>);
+    const {user, search, resultList, drinks, favComponent, validIngredients} = this.state;
+    const SearchComponent = (
+      <Search
+        handleSearchSubmit={this.handleSearchSubmit}
+        validIngredients={validIngredients}
+      />
+    );
     return (
       <div className="main">
         <Header/>
         {search ? SearchComponent : ''}
-        {resultList ? <ResultsList drinks={drinks}/> : ''}
-        {favComponent ?
-          <FavoriteList onRemove={this.removeFavDrink} user={user}/> : ''
-        }
+        {resultList ? <ResultsList drinks={drinks} onClose={this.handleClose}/> : ''}
+        {favComponent ? <FavoriteList onRemove={this.removeFavDrink} user={user}/> : ''}
+        <Footer/>
       </div>
     )
   }

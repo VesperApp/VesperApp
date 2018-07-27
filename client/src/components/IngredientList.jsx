@@ -16,7 +16,7 @@ const IngredientList = (props) => {
   return (
     <div className="ingredientLists">
       <div className="title">
-        This is the selected IngredientList component
+        This is the selected IngredientList 
       </div>
       {IngredientItems}
       <input onClick={(e) => onSubmit(e, ingredients)} type="submit" value="Submit"/>
