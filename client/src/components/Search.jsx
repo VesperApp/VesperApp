@@ -69,7 +69,7 @@ class Search extends React.Component {
       <div className="search">
         <form className="searchView">
           <div className="title">
-            What ingredients do you have?
+            What drink ingredients do you have?
           </div>
           <input
             onChange={this.inputHandler}

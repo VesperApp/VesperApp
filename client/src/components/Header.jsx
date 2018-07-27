@@ -92,7 +92,9 @@ class Header extends React.Component {
       <div className = "headerContent">
         <div className = "header">
           <div>
+          {/* 
             <img src = "http://www.finsmes.com/wp-content/uploads/2018/05/vesper.png" width="150px" className="logo"/>
+            */} 
             </div>
             <div className= "appName">
             Andy's Tropical Beach Party

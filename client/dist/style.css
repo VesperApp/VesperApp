@@ -1,5 +1,11 @@
 body {
   background: #FFF;
+  background-image: url('https://png.pngtree.com/thumb_back/fh260/back_pic/03/93/13/8157e504b9eb833.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  background-size: cover;
+
 }
 
 .listView {
@@ -141,7 +147,7 @@ table tr {
   width: 40%;
   position: relative;
   margin-left: 30%;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .search .searchView{
@@ -179,14 +185,17 @@ table tr {
 }
 
 .search .title{
+  font-family: 'Seaweed Script', cursive;
   width: 100%;
   text-align: center;
   position: relative;;
-  font-size: 22px;
+  font-size: 50px;
   margin:auto;
   margin-top: 20px;
   padding-top: 20px;
-  color: #999;
+  font-weight: bold;
+  color:silver;
+  text-shadow: 3px 3px 3px rgb(14, 39, 43);
 }
 
 .ingredientLists{
@@ -211,7 +220,7 @@ table tr {
   width: 100%;
   text-align: left;
   position: relative;;
-  font-size: 17px;
+  font-size: 30px;
   margin-left: 20px;
   margin-top: 20px;
   padding-top: 20px;
@@ -369,14 +378,15 @@ body{
 
 .header .appName
 {
-    font-size: 42px;
+    font-family: 'Seaweed Script', cursive;
+    font-size: 60px;
+    font-weight: bold;
     /* border: 1px solid red; */
     position: absolute;
-    margin-left: 32%;
+    margin-left: 5%;
     margin-top: 18px;
     color:green;
-    font-family: inherit;
-    text-shadow: 1px 1px 4px #000;
+    text-shadow: 4px 4px 4px rgb(201, 201, 0);
 }
 .favorite{
     background:green;

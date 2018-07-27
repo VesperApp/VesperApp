@@ -57,9 +57,7 @@ Drink.findAll = (callback) => {
 // TODO: Return drinks that match exactly with given ingredients
 Drink.selectDrinkByigredients = function(ingredientsArray,callback){
     //add an empty space to query
-    ingredientsArray.push("");
-    //search query
-    Drink.find({
+    let searchTemplate = {
       strIngredient1: {$in: ingredientsArray},
       strIngredient2: {$in: ingredientsArray},
       strIngredient3: {$in: ingredientsArray},
@@ -75,7 +73,19 @@ Drink.selectDrinkByigredients = function(ingredientsArray,callback){
       strIngredient13: {$in: ingredientsArray},
       strIngredient14: {$in: ingredientsArray},
       strIngredient15: {$in: ingredientsArray},
-    },function(err,drinks){
+    }
+    
+    let queryLen = ingredientsArray.length;
+
+    let queryBuilder = {};
+    ingredientsArray.forEach(function(ele,index){
+      queryBuilder[`strIngredient${index+1}`]=searchTemplate[`strIngredient${index+1}`];
+    })
+
+    ingredientsArray.push("");
+
+    //search query
+    Drink.find(queryBuilder,function(err,drinks){
       if(err){
         console.log("Find an error",err);
         callback(null, error)
