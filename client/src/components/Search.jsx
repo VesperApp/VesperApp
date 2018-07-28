@@ -1,6 +1,7 @@
 import React from 'react';
 
 import IngredientList from './IngredientList.jsx';
+import Autocomplete from 'react-autocomplete'
 
 class Search extends React.Component {
   constructor(props) {
@@ -62,6 +63,13 @@ class Search extends React.Component {
     });
   }
 
+  matchStateToTermWithHeaders(state, value) {
+    console.log(state);
+    return value && (
+      state.label.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    )
+  }
+
   render() {
     const {serchInput, listIngredients} = this.state;
     const {handleSearchSubmit} = this.props;
@@ -76,6 +84,23 @@ class Search extends React.Component {
             type='text'
             placeholder='rum'
             value={serchInput}
+          />
+          <Autocomplete
+            getItemValue={(item) => item.label}
+            items={[
+              { label: 'apple' },
+              { label: 'banana' },
+              { label: 'pear' }
+            ]}
+            renderItem={(item, isHighlighted) =>
+              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                {item.label}
+              </div>
+            }
+            value={serchInput}
+            onChange={this.inputHandler}
+            onSelect={value => this.setState({ serchInput: value })}
+            shouldItemRender={this.matchStateToTermWithHeaders}
           />
           <input onClick={this.addItem} type='submit' value = 'Add'/>
           <span>{this.state.errMsg}</span>
