@@ -1,4 +1,4 @@
-  const mongoose = require('./db.js');
+const mongoose = require('./db.js');
 const drinksData = require('./data/drinks.js');
 
 const drinkSchema = mongoose.Schema({

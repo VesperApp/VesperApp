@@ -8,7 +8,7 @@ const ingredient  = require('../database/ingredient.js');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 
-let app = express();
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true, useNewUrlParser: true }));
 app.use(bodyParser.json());
@@ -103,9 +103,9 @@ app.get('/ingredients', (req, res) => {
 });
 
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
-});
+
+
+
 
 
 /************************************************************/
@@ -197,5 +197,13 @@ var checkSession = function(req, res, next) {
   }
 }
 
-// for jest testing
-module.exports = app;
+
+
+if (process.env.node_env !== 'test') {
+  app.listen(3000, function () {
+    console.log('listening on port 3000!');
+  });
+} else {
+  // for jest testing
+  module.exports = app;
+}
