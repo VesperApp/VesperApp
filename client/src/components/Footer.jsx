@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Footer of the page.
+ * @param {object} props 
+ */
 const Footer = (props) => {
   return (
     <div className="footer">
