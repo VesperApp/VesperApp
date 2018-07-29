@@ -20,10 +20,9 @@ class Header extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.logOut = this.logOut.bind(this);
     this.showFavoris = this.showFavoris.bind(this);
-    
   }
-  componentDidMount(){
 
+  componentDidMount(){
     var user = localStorage.getItem("users");
     if(user){
       var objUser = JSON.parse(user)
@@ -41,19 +40,30 @@ class Header extends React.Component {
       })
     }
   }
+  
+  /**
+   * Render login component.
+   */
   showLoginComponent(){
     this.setState({
       login : true,
       signUp : false
     })
   }
+
+  /**
+   * Render signup component.
+   */
   showSignUp(){
     this.setState({
       login : false,
       signUp : true
-    })
+    });
   }
 
+  /**
+   * Render favoirteList compoenent.
+   */
   showFavoris(){  
     if(this.state.favComponent===true){
       this.setState({
@@ -66,6 +76,9 @@ class Header extends React.Component {
     }
   }
 
+  /**
+   * When user clicks on logout.
+   */
   logOut(){
     window.localStorage.removeItem("users");
     //location.reload();
@@ -79,6 +92,10 @@ class Header extends React.Component {
     });
   }
 
+  /**
+   * Close specific popup component.
+   * @param {string} popupName - name of the popup component that we intend to close.
+   */
   handleClose(popupName) {
     if (popupName === SignUp.name) {
       this.setState({signUp: false});

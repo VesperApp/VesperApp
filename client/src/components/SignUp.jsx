@@ -7,6 +7,7 @@ class SignUp extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -32,7 +33,7 @@ class SignUp extends React.Component {
           console.error('Omg my god', error.responseText);
         }
     });
-}
+  }
 
   render () {
     const {onClose} = this.props;

@@ -12,6 +12,11 @@ class ResultsList extends React.Component {
     this.handleclose = this.handleclose.bind(this);
   }
 
+  /**
+   * When a row of the result drinks list is clicked, render the clicked drink.
+   * @param {object} e - Event object.
+   * @param {object} drink - Selected drink.
+   */
   handleRowClick(e, drink) {
     e.stopPropagation();
     this.setState({
@@ -20,6 +25,9 @@ class ResultsList extends React.Component {
     });
   }
 
+  /**
+   * Close the drink's detail popup.
+   */
   handleclose() {
     this.setState({
       cockTailDetail: false,

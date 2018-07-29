@@ -1,6 +1,9 @@
 import React from 'react';
 import CocktailDetails from './CocktailDetails.jsx';
 
+/**
+ * This component is not being used.
+ */
 class FavoriteList extends React.Component {
   constructor(props) {
     super(props);
