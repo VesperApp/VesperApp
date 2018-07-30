@@ -1,6 +1,8 @@
 # Andy's Tropical Beach Party App
 
-Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience by providing Andy with the drink ingredients you have at hand and instantly recieve relevant mixed drink recipes. Gain new insight with what you have and turn any garthering into a party.
+Hello HRR32, thanks for viewing our app! We summarized some quick points below so you could easily jump right in. 
+
+Our vision: Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience by providing Andy with the drink ingredients you have at hand and instantly recieve relevant mixed drink recipes. Gain new insight with what you have and turn any garthering into a party.
 
 ## Table of Contents
 
@@ -12,9 +14,11 @@ Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience
 
 ## Usage
 
-> Enter your current drink ingredients into the single search bar on the homepage. Andy will return relevant mixed drink recipes based on a carefully curated algorithm pared with a large (and growing!) database of drink recipes. 
+We relied on TheCocktailDB.com API. We were able to download a significant portion of the API database to test search alogrithm queries locally. Thus, locally we have over 300 drinks and 150 ingredients to query Mongo directly. Please reference the data in the folder: ./database/data/drinks.js for a look at the data schema. We relied on Mongo and Moongoose ORM. The database files for Mongoose are split into seperate files for drinks, ingredients, and users located at ./database. Our "search query" is found in ./database/drink.js which queries Mongo given the provided drink ingredients. 
 
-We relied on TheCocktailDB.com API. We were able to download a significant portion of the API database to test search alogrithm queries locally. Please reference the data in the folder ./database/data/drinks.js for the database schema. 
+Files are organized following the solo-MVP file path organization structure. Front-end files are located in ./client with React component files located in ./client/src/components. We did not have an opportunity to use a front end framework. Given the current minium number of pages, it would be a good opporunity to use a front end framework for consistant styling. 
+
+Server files are located in ./server/index.js.
 
 ## Requirements
 
@@ -37,3 +41,5 @@ npm install
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+As always, feel free to reach out to anyone of us if you have any questions. 
