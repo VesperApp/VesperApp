@@ -10,7 +10,7 @@ We relied on TheCocktailDB.com API. We were able to download a significant porti
 
 Files are organized following the solo-MVP file path organization structure. Front-end files are located in ./client with React component files located in ./client/src/components. We did not have an opportunity to use a front end framework. Given the current minium number of pages, it would be a good opporunity to use a front end framework for consistant styling. 
 
-Server files are located in ./server/index.js.
+Server files are located in ./server/index.js. Our authentication is not fully fleshed out and relies on localStorage of sessions. This should be fixed for something more persistant and secure which also impacts our user favorites function. 
 
 ## Requirements
 
