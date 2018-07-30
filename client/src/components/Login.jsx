@@ -7,6 +7,10 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /**
+   * Submit login information.
+   * @param {object} event - Event object.
+   */
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -53,7 +57,10 @@ class Login extends React.Component {
   }
 }
 
-
+/**
+ * Stringify form data.
+ * @param {obejct} fd - Data from the form.
+ */
 function stringifyFormData(fd) {
   const data = {};
     for (let key of fd.keys()) {
