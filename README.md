@@ -34,4 +34,4 @@ npm install
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
-As always, feel free to reach out to anyone of us if you have any questions. 
+As always, feel free to reach out to any of us if you have any questions. 
