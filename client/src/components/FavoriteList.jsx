@@ -13,6 +13,11 @@ class FavoriteList extends React.Component {
     this.handleRowClick = this.handleRowClick.bind(this);
   }
 
+  /**
+   * When the row on list is clicked.
+   * @param {object} e - Event object.
+   * @param {object} drink - The drink information object on the row of list.
+   */
   handleRowClick(e, drink) {
     e.stopPropagation();
     this.setState({selectedDrink: drink});
