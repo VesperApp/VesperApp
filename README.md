@@ -38,4 +38,10 @@ npm install
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
+Workflow ideas for a 4-day sprint:
+-install a front-end framework
+-add proper authentication/o-auth (and user favorites)
+-improve search recipe query - incorporate another API into sorting mechanism
+-collect more user input, comments, ratings, etc
+
 As always, feel free to reach out to any of us if you have any questions. 
