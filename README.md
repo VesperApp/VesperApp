@@ -14,6 +14,8 @@ Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience
 
 > Enter your current drink ingredients into the single search bar on the homepage. Andy will return relevant mixed drink recipes based on a carefully curated algorithm pared with a large (and growing!) database of drink recipes. 
 
+We relied on TheCocktailDB.com API. We were able to download a significant portion of the API database to test search alogrithm queries locally. Please reference the data in the folder ./database/data/drinks.js for the database schema. 
+
 ## Requirements
 
 - Node 0.10.x
