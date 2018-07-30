@@ -6,11 +6,15 @@ Our vision: Andy is a Virtual mixologist AI. Integrate Andy in your next cocktai
 
 ## Usage
 
+Files are organized following the solo-MVP file path organization structure. 
+
 We relied on TheCocktailDB.com API. We were able to download a significant portion of the API database to test search alogrithm queries locally. Thus, locally we have over 300 drinks and 150 ingredients to query Mongo directly. Please reference the data in the folder: ./database/data/drinks.js for a look at the data schema. We relied on Mongo and Moongoose ORM. The database files for Mongoose are split into seperate files for drinks, ingredients, and users located at ./database. Our "search query" is found in ./database/drink.js which queries Mongo given the provided drink ingredients. 
 
-Files are organized following the solo-MVP file path organization structure. Front-end files are located in ./client with React component files located in ./client/src/components. We did not have an opportunity to use a front end framework. Given the current minium number of pages, it would be a good opporunity to use a front end framework for consistant styling. 
-
 Server files are located in ./server/index.js. Our authentication is not fully fleshed out and relies on localStorage of sessions. This should be fixed for something more persistant and secure which also impacts our user favorites function. 
+
+Front-end files are located in ./client with React component files located in ./client/src/components. We did not have an opportunity to use a front end framework. Given the current minium number of pages, it would be a good opporunity to use a front end framework for consistant and impactful styling. Notable front-end features include auto-complete and valiation of ingredient inputs. 
+
+We also have some testing scripts installed which can be run using "npm run test".
 
 ## Requirements
 
