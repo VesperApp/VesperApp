@@ -443,6 +443,18 @@ body{
     font-size: 18px;
 }
 
+.searchInput {
+    display: inline-block;
+    width: 88%;
+    border: none;
+    height: 40px;
+    background: #eee;
+    line-height: 40px;
+    padding-left: 10px;
+    margin-left: 5px;
+    border-radius: 50px;
+    z-index: 3
+}
 
 
 
