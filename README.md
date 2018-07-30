@@ -1,6 +1,6 @@
 # Andy's Tropical Beach Party App
 
-Hello HRR32, thanks for viewing our app! We summarized some quick points below so you could easily jump right in. 
+Hello HRR32, thanks for viewing our app! This is a clean platform to implement whatever new API, framework, tech that you want more practice/experience with! We summarized some quick points below so you could easily jump right in. 
 
 Our vision: Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience by providing Andy with the drink ingredients you have at hand and instantly recieve relevant mixed drink recipes. Gain new insight with what you have and turn any garthering into a party.
 
