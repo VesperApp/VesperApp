@@ -2,11 +2,11 @@
 
 Hello HRR32, thanks for viewing our app! This is a clean platform to implement whatever new API, framework, tech that you want more practice/experience with! We summarized some quick points below so you could easily jump right in. 
 
-Our vision: Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience by providing Andy with the drink ingredients you have at hand and instantly recieve relevant mixed drink recipes. Gain new insight with what you have and turn any garthering into a party.
+Our vision: Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience by providing Andy with the drink ingredients you have at hand and instantly recieve relevant mixed drink recipes.
 
 ## Usage
 
-Files are organized following the solo-MVP file path organization structure. 
+Files are organized following the solo-MVP file path organization structure. Here is the good, the bad, and the ugly:
 
 We relied on TheCocktailDB.com API. We were able to download a significant portion of the API database to test search alogrithm queries locally. Thus, locally we have over 300 drinks and 150 ingredients to query Mongo directly. Please reference the data in the folder: ./database/data/drinks.js for a look at the data schema. We relied on Mongo and Moongoose ORM. The database files for Mongoose are split into seperate files for drinks, ingredients, and users located at ./database. Our "search query" is found in ./database/drink.js which queries Mongo given the provided drink ingredients. 
 
