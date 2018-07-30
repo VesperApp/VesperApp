@@ -12,7 +12,7 @@ Andy is a Virtual mixologist AI. Integrate Andy in your next cocktail experience
 
 ## Usage
 
-> Enter drink ingredients into the single search bar on the homepage. Andy will return relevant mixed drink recipes based on a carefully tuned algorithm and large and growing database of drink recipes. 
+> Enter your current drink ingredients into the single search bar on the homepage. Andy will return relevant mixed drink recipes based on a carefully tuned algorithm paried with a large (and growing!) database of drink recipes. 
 
 ## Requirements
 
@@ -31,11 +31,6 @@ From within the root directory:
 ```sh
 npm install
 ```
-
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 
 ## Contributing
 
