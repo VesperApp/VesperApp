@@ -22,4 +22,4 @@ const CocktailDetails = (props) => {
   }
 };
 
-export default CocktailDetails;
+export default CocktailDetails; 
