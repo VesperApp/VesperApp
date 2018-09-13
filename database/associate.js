@@ -19,4 +19,4 @@ sequelize.sync({force:true}).then(()=>{
             user.setDrinks([drink]).then(data=>console.log("this is the data",data))
         )
     })
-}) 
+})  
