@@ -3,3 +3,4 @@ node_modules
 .flooignore
 ./client/dist/bundle.js
 ./database/config.js
+package-lock.json
