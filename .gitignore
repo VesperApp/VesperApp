@@ -2,3 +2,4 @@ node_modules
 .floo
 .flooignore
 ./client/dist/bundle.js
+./database/config.js
