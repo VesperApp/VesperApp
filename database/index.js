@@ -6,12 +6,21 @@ const Ingredient = require('./Ingredients');
 const DrinkIngredient = require('./DrinkIngredients');
 const Comment = require('./Comments');
 
+const db = {
+    sequelize,
+    User,
+    Drink,
+    Favorite,
+    Ingredient,
+    DrinkIngredient,
+    Comment,
+}
 
 User.hasMany(Drink, { foreignKey: 'creator_ID' });
 
-Drink.belongsToMany(Ingredient, { through: 'DrinkIngredients' });
+Drink.belongsToMany(Ingredient, { through: 'DrinkIngredient' });
 
-Ingredient.belongsToMany(Drink, { through: 'DrinkIngredients' });
+Ingredient.belongsToMany(Drink, { through: 'DrinkIngredient' });
 
 
 sequelize.sync({force:true}).then(()=>{
@@ -27,3 +36,5 @@ sequelize.sync({force:true}).then(()=>{
         )
     })
 })
+
+module.exports = db;
