@@ -1,11 +1,18 @@
 const sequelize = require('./sequelize');
 const User = require('./Users');
 const Drink = require('./Drinks');
-const avorite = require('./Favorites');
+const Favorite = require('./Favorites');
+const Ingredient = require('./Ingredients');
+const DrinkIngredient = require('./DrinkIngredients');
+const Comment = require('./Comments');
 
-// User.belongsToMany(Drink, { through: 'Favorites' });
+
 User.hasMany(Drink, { foreignKey: 'creator_ID' });
-// Drink.belongsToMany(User, { through: 'Favorites' });
+
+Drink.belongsToMany(Ingredient, { through: 'DrinkIngredients' });
+
+Ingredient.belongsToMany(Drink, { through: 'DrinkIngredients' });
+
 
 sequelize.sync({force:true}).then(()=>{
     User.create({
