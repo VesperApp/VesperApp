@@ -1,6 +1,10 @@
 const sequelize = require('./sequelize');
 const User = require('./Users');
-const Drink = require('./Drinks');
+
+const DrinkMethods = require('./Drinks');
+const Drink = DrinkMethods.Drink;
+// const Drink = require('./Drinks');
+
 const Favorite = require('./Favorites');
 const Ingredient = require('./Ingredients');
 const DrinkIngredient = require('./DrinkIngredients');

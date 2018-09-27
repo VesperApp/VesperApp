@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const drink  = require('../database/drink.js');
-const user  = require('../database/user.js');
-const ingredient  = require('../database/ingredient.js');
+const drink  = require('../database/drinks.js');
+const user  = require('../database/users.js');
+const ingredient  = require('../database/ingredients.js');
 
 // const user = require('../database/user.js')
 const bcrypt = require('bcrypt');
