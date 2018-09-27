@@ -15,6 +15,7 @@ Catagory.hasMany(Drink, { foreignKey: 'catagory_ID' });
 Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
 
 sequelize.sync({force:true}).then(()=>{
+
     User.create({
         user_name: "HI12345",
         password: "Sequelize.STRING",
@@ -26,4 +27,9 @@ sequelize.sync({force:true}).then(()=>{
             user.setDrinks([drink]).then(data=>console.log("this is the data",data))
         )
     })
-})  
+
+    User.create({
+        user_name:"heeheehee",
+        password: "securepassword"
+    })
+}) 
