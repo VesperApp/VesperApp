@@ -1,5 +1,6 @@
-const sequelize = require('./sequelize');
 const Sequelize = require('sequelize');
+const sequelize = require('./sequelize');
+
 
 const Ingredient = sequelize.define('Ingredient', {
   ingredient_name: Sequelize.STRING,
