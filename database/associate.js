@@ -1,17 +1,16 @@
 const sequelize = require('./sequelize');
 const User = require('./Users');
 
-const DrinkMethods = require('./Drinks');
-const Drink = DrinkMethods.Drink;
-const Catagory = DrinkMethods.Catagory;
-const Glass = DrinkMethods.Glass;
+const Drink = require('./Drinks');
+const Category = require('./Categories');
+const Glass = require('./Glasses');
 
 const Favorite = require('./Favorites');
 
 // User.belongsToMany(Drink, { through: 'Favorites' });
 User.hasMany(Drink, { foreignKey: 'creator_ID' });
 // Drink.belongsToMany(User, { through: 'Favorites' });
-Catagory.hasMany(Drink, { foreignKey: 'catagory_ID' });
+Category.hasMany(Drink, { foreignKey: 'category_ID' });
 
 Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
 
@@ -36,10 +35,10 @@ sequelize.sync({force:true}).then(()=>{
 
     //create a "shot" && "glass" catagory to associate it with a Drink:
     // first create the catagory "shot"
-    Catagory.create({
-        catagory_name: "shots123"
+    Category.create({
+        category_name: "shots123"
     }).then(
-        newCatagory=> 
+        newCategory=> 
             // first create the catagory "glass"
             Glass.create({
                 glass_name: "Shot Glass123"
@@ -50,7 +49,7 @@ sequelize.sync({force:true}).then(()=>{
                     picture_url: "www.drinkpic123.com"
                 }).then(drink => 
                   {  //associate the "shot" && "glass" with the "drink":
-                    newCatagory.setDrinks([drink]).then(data=> console.log("this is the glass data:",data))
+                    newCategory.setDrinks([drink]).then(data=> console.log("this is the glass data:",data))
                     newGlass.setDrinks([drink]).then(data=> console.log("this is the glass data:",data))}
                 )
             )
