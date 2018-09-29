@@ -25,6 +25,3 @@ module.exports = {
   Glass: Glass,
   Ingredient:Ingredient
 }
-// module.exports.Drink = Drink;
-// module.exports.Catagory = Catagory;
-// module.exports.Glass = Glass;
