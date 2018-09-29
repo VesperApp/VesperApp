@@ -1,8 +1,8 @@
-const sequelize = require('./sequelize');
 const Sequelize = require('sequelize');
+const sequelize = require('./sequelize');
 
-const Glass = sequelize.define('Glass',{
-  glass_name: Sequelize.STRING
+const Glass = sequelize.define('Glass', {
+  glass_name: Sequelize.STRING,
 });
 
 module.exports = Glass;
