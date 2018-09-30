@@ -1,17 +1,8 @@
 const db = require('../associate');
+const { truncateTables } = require('./util');
 
 describe('Test sequalize models', () => {
-  const insertIngredients = () => db.Ingredient.bulkCreate([
-    { ingredient_name: 'orange juice' },
-    { ingredient_name: 'vodka' },
-    { ingredient_name: 'rum' },
-  ]);
-
-  beforeAll(() => db.sequelize
-    .sync({ force: true })
-    .then(insertIngredients));
-
-  afterAll(() => db.sequelize.close());
+  beforeAll(() => truncateTables());
 
   test('should be running on test environment', () => {
     expect(process.env.NODE_ENV).toBe('test');
