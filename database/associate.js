@@ -4,6 +4,7 @@ const User = require('./Users');
 const Drink = require('./Drinks');
 const Category = require('./Categories');
 const Glass = require('./Glasses');
+const Ingredient = require('./Ingredients');
 
 const Favorite = require('./Favorites');
 
@@ -13,6 +14,9 @@ User.hasMany(Drink, { foreignKey: 'creator_ID' });
 Category.hasMany(Drink, { foreignKey: 'category_ID' });
 
 Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
+
+Drink.belongsToMany(Ingredient, { through: 'DrinkIngredient' });
+Ingredient.belongsToMany(Drink, { through: 'DrinkIngredient' });
 
 sequelize.sync({force:true}).then(()=>{
 
@@ -58,3 +62,13 @@ sequelize.sync({force:true}).then(()=>{
 
 
 }) 
+
+module.exports = {
+  sequelize,
+  User,
+  Drink,
+  Category,
+  Glass,
+  Ingredient,
+  Favorite,
+};
