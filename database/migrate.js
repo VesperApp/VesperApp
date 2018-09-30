@@ -26,4 +26,10 @@ const migrateIngredients = () => Ingredient.bulkCreate(
   ),
 );
 
+/**
+ * Execute the migration.
+ */
+migrateCategories().then(migrateGlasses)
+  .then(migrateIngredients);
+
 module.exports = { migrateCategories, migrateGlasses, migrateIngredients };
