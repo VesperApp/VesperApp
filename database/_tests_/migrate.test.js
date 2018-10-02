@@ -17,9 +17,10 @@ const {
   Ingredient,
 } = require('../associate');
 const { migrateCategories, migrateGlasses, migrateIngredients } = require('../migrate');
-const { truncateTables } = require('./util');
+const { truncateTables, endConnection } = require('./util');
 
 beforeAll(() => truncateTables());
+afterAll(() => endConnection());
 
 describe.each([
   [migrateCategories, Category, CategoriesData, 'category_name', 'strCategory'],
