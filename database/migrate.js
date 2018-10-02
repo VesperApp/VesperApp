@@ -3,10 +3,46 @@
 const CategoriesData = require('./data/categories');
 const GlassesData = require('./data/glasses');
 const IngredientsData = require('./data/ingredients');
+const DrinksData = require('./data/drinks');
 
-const Category = require('./Categories');
-const Glass = require('./Glasses');
-const Ingredient = require('./Ingredients');
+const { Category, Glass, Ingredient, Drink } = require('./associate');
+
+/**
+ * This will also insert records into DrinksIngredients table.
+ */
+const addIngredientsForOneDrink = (drinkModel, drinkData) => {
+  const executions = [];
+  for (let i = 1; i <= 15; i += 1) {
+    const strIngredient = drinkData[`strIngredient${i}`].trim();
+    const strMeasure = drinkData[`strMeasure${i}`].trim();
+    if (strIngredient === '') {
+      continue;
+    }
+    const execution = Ingredient.findOrCreate({ where: { ingredient_name: strIngredient } })
+      .spread((ingredient, created) => {
+        ingredient.DrinkIngredient = { measurement: strMeasure };
+        drinkModel.addIngredient(ingredient, { through: { measurement: '' } });
+      });
+    executions.push(execution);
+  }
+  return Promise.all(executions);
+};
+
+// const drinkData = DrinksData[0];
+const migrateOneDrink = drinkData => Drink.create({
+  drink_name: drinkData.strDrink,
+  picture_url: drinkData.strDrinkThumb,
+}).then(createdDrink => addIngredientsForOneDrink(createdDrink, drinkData));
+
+
+const migrateDrinks = () => {
+  const executions = [];
+  DrinksData.forEach((drinkData) => {
+    const execution = migrateOneDrink(drinkData);
+    executions.push(execution);
+  });
+  return Promise.all(executions);
+};
 
 const migrateCategories = () => Category.bulkCreate(
   CategoriesData.map(
@@ -26,10 +62,12 @@ const migrateIngredients = () => Ingredient.bulkCreate(
   ),
 );
 
+
 /**
  * Execute the migration.
  */
 migrateCategories().then(migrateGlasses)
-  .then(migrateIngredients);
+  .then(migrateIngredients)
+  .then(migrateDrinks);
 
 module.exports = { migrateCategories, migrateGlasses, migrateIngredients };
