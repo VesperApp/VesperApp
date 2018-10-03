@@ -165,3 +165,4 @@ if (process.env.node_env !== 'test') {
   // for jest testing
   module.exports = app;
 }
+//
