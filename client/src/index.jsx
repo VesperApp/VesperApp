@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import axios from 'axios';
 
-import user from '../../database/data/user.js'
+import user from '../../database/data/user.js';
 
 import Header from './components/Header.jsx';
 import Search from './components/Search.jsx';
@@ -11,7 +11,7 @@ import ResultsList from './components/ResultsList.jsx';
 import IngredirentList from './components/IngredientList.jsx';
 import FavoriteList from './components/FavoriteList.jsx';
 import CocktailDetails from './components/CocktailDetails.jsx';
-import Footer from './components/Footer.jsx'
+import Footer from './components/Footer.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +22,8 @@ class App extends React.Component {
       user: user,
       search: true,
       resultList: false,
-      favComponent: false
-    }
+      favComponent: false,
+    };
     this.removeFavDrink = this.removeFavDrink.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -38,7 +38,7 @@ class App extends React.Component {
    */
   showSearchComponent() {
     this.setState({
-      search: !this.state.search
+      search: !this.state.search,
     });
   }
 
@@ -46,9 +46,10 @@ class App extends React.Component {
    * Get the ingredients object(not array) used to validate user's search input.
    */
   fetchValidIngredients() {
-    axios.get('/ingredients')
-         .then((res) => this.setState({validIngredients: res.data}))
-         .catch((err) => console.log(err));
+    axios
+      .get('/ingredients')
+      .then(res => this.setState({ validIngredients: res.data }))
+      .catch(err => console.log(err));
   }
 
   /**
@@ -61,21 +62,22 @@ class App extends React.Component {
     if (!ingredients.length) {
       return;
     }
-    
+
     let drinks = [];
     const postData = ingredients.reduce((obj, ingre) => {
       obj[ingre] = 1;
       return obj;
     }, {});
 
-    axios.post('/drinksByIngredient', postData)
-         .then((res) => {
-           this.setState({
-             drinks:res.data,
-             resultList: true
-           });
-         })
-         .catch((err) => console.log(err));
+    axios
+      .post('/drinksByIngredient', postData)
+      .then(res => {
+        this.setState({
+          drinks: res.data,
+          resultList: true,
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   /**
@@ -84,7 +86,7 @@ class App extends React.Component {
    */
   handleClose(popupName) {
     if (popupName === ResultsList.name) {
-      this.setState({resultList: false});
+      this.setState({ resultList: false });
     }
   }
 
@@ -96,7 +98,7 @@ class App extends React.Component {
   removeFavDrink(e, drink) {
     e.stopPropagation();
 
-    const {user} = this.state;
+    const { user } = this.state;
     //copy the array
     let favDrinks = [...user.favDrinks];
     for (let i = 0; i < favDrinks.length; i++) {
@@ -109,30 +111,24 @@ class App extends React.Component {
       user: {
         name: user.name,
         password: user.password,
-        favDrinks: favDrinks
-      }
+        favDrinks: favDrinks,
+      },
     });
   }
 
   render() {
-    const {user, search, resultList, drinks, favComponent, validIngredients} = this.state;
-    const SearchComponent = (
-      <Search
-        handleSearchSubmit={this.handleSearchSubmit}
-        validIngredients={validIngredients}
-      />
-    );
+    const { user, search, resultList, drinks, favComponent, validIngredients } = this.state;
+    const SearchComponent = <Search handleSearchSubmit={this.handleSearchSubmit} validIngredients={validIngredients} />;
     return (
       <React.Fragment>
-        <Header/>
+        <Header />
         {search ? SearchComponent : ''}
-        {resultList ? <ResultsList drinks={drinks} onClose={this.handleClose}/> : null}
-        {favComponent ? <FavoriteList onRemove={this.removeFavDrink} user={user}/> : null}
-        <Footer/>
+        {resultList ? <ResultsList drinks={drinks} onClose={this.handleClose} /> : null}
+        {favComponent ? <FavoriteList onRemove={this.removeFavDrink} user={user} /> : null}
+        <Footer />
       </React.Fragment>
-    )
+    );
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-

@@ -1,12 +1,12 @@
 import React from 'react';
-import CocktailDetails from './CocktailDetails.jsx'
+import CocktailDetails from './CocktailDetails.jsx';
 
 class ResultsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedDrink: null,
-      cockTailDetail: false
+      cockTailDetail: false,
     };
     this.handleRowClick = this.handleRowClick.bind(this);
     this.handleclose = this.handleclose.bind(this);
@@ -21,7 +21,7 @@ class ResultsList extends React.Component {
     e.stopPropagation();
     this.setState({
       cockTailDetail: true,
-      selectedDrink: drink
+      selectedDrink: drink,
     });
   }
 
@@ -35,17 +35,17 @@ class ResultsList extends React.Component {
   }
 
   render() {
-    const {cockTailDetail, selectedDrink} = this.state;
-    const {onClose} = this.props;
-    const {name} = this.constructor;
+    const { cockTailDetail, selectedDrink } = this.state;
+    const { onClose } = this.props;
+    const { name } = this.constructor;
     const TableRows = this.props.drinks.map((drink, i) => (
-      <tr onClick={(e) => this.handleRowClick(e, drink)} key={i}>
+      <tr onClick={e => this.handleRowClick(e, drink)} key={i}>
         <th scope="row">{i + 1}</th>
         <td>{drink.strDrink}</td>
         <td>{drink.strCategory}</td>
         <td>
           <a>
-            <span className="glyphicon glyphicon-thumbs-up"></span>
+            <span className="glyphicon glyphicon-thumbs-up" />
           </a>
         </td>
       </tr>
@@ -60,7 +60,7 @@ class ResultsList extends React.Component {
             <div>
               <h2> Result by ingredients </h2>
             </div>
-            <table className="table table-hover " >
+            <table className="table table-hover ">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -69,12 +69,10 @@ class ResultsList extends React.Component {
                   <th scope="col">Save</th>
                 </tr>
               </thead>
-              <tbody>
-                {TableRows}
-              </tbody>
+              <tbody>{TableRows}</tbody>
             </table>
           </div>
-          { cockTailDetail ? <CocktailDetails drink={selectedDrink} onClose={this.handleclose}/> : ''}
+          {cockTailDetail ? <CocktailDetails drink={selectedDrink} onClose={this.handleclose} /> : ''}
         </div>
       </div>
     );

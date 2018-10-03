@@ -4,24 +4,20 @@ import CocktailDetails from './CocktailDetails.jsx';
 class FakeFavorisdrink extends React.Component {
   constructor(props) {
     super(props);
-    
-    console.log(localStorage.getItem("users"))
-   
+
+    console.log(localStorage.getItem('users'));
   }
- 
+
   render() {
     return (
       <div>
         <div className="formView">
           <div className="fav">
-            <div className="title">
-               User 's favoris drink 
-            </div>
+            <div className="title">User 's favoris drink</div>
           </div>
-          <table className="table table-hover " >
+          <table className="table table-hover ">
             <thead>
-              <tr>
-              </tr>
+              <tr />
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Drink Name</th>
@@ -29,9 +25,7 @@ class FakeFavorisdrink extends React.Component {
                 <th scope="col">Remove</th>
               </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody />
           </table>
         </div>
       </div>
