@@ -53,15 +53,34 @@ const addIngredientsForOneDrink = (drinkModel, drinkData) => {
   return Promise.all(executions);
 };
 
-const migrateOneDrink = drinkData =>
-  Drink.create({
+async function migrateOneDrink(drinkData) {
+  const createdDrink = await Drink.create({
     drink_name: drinkData.strDrink,
     picture_url: drinkData.strDrinkThumb,
-  }).then(createdDrink =>
-    addIngredientsForOneDrink(createdDrink, drinkData)
-      .then(() => addGlassForOneDrink(createdDrink, drinkData))
-      .then(() => addCategoryForOneDrink(createdDrink, drinkData))
-  );
+  });
+
+  await addIngredientsForOneDrink(createdDrink, drinkData);
+  await addGlassForOneDrink(createdDrink, drinkData);
+  await addCategoryForOneDrink(createdDrink, drinkData);
+}
+
+// const migrateOneDrink = drinkData =>
+//   Drink.create({
+//     drink_name: drinkData.strDrink,
+//     picture_url: drinkData.strDrinkThumb,
+//   }).then(createdDrink =>
+//     addIngredientsForOneDrink(createdDrink, drinkData)
+//       .then(() => addGlassForOneDrink(createdDrink, drinkData))
+//       .then(() => addCategoryForOneDrink(createdDrink, drinkData))
+//   );
+
+const migrateCategories = () =>
+  Category.bulkCreate(CategoriesData.map(record => ({ category_name: record.strCategory })));
+
+const migrateGlasses = () => Glass.bulkCreate(GlassesData.map(record => ({ glass_name: record.strGlass })));
+
+const migrateIngredients = () =>
+  Ingredient.bulkCreate(IngredientsData.map(record => ({ ingredient_name: record.strIngredient1 })));
 
 const migrateDrinks = () => {
   const executions = [];
@@ -72,19 +91,20 @@ const migrateDrinks = () => {
   return Promise.all(executions).catch(err => console.log(err));
 };
 
-const migrateCategories = () =>
-  Category.bulkCreate(CategoriesData.map(record => ({ category_name: record.strCategory })));
-const migrateGlasses = () => Glass.bulkCreate(GlassesData.map(record => ({ glass_name: record.strGlass })));
-
-const migrateIngredients = () =>
-  Ingredient.bulkCreate(IngredientsData.map(record => ({ ingredient_name: record.strIngredient1 })));
-
 /**
  * Execute the migration.
  */
-migrateCategories()
-  .then(migrateGlasses)
-  .then(migrateIngredients)
-  .then(migrateDrinks);
 
-module.exports = { migrateCategories, migrateGlasses, migrateIngredients, migrateDrinks };
+(async function migratedata() {
+  await migrateCategories();
+  await migrateGlasses();
+  await migrateIngredients();
+  await migrateDrinks();
+})();
+
+module.exports = {
+  migrateCategories,
+  migrateGlasses,
+  migrateIngredients,
+  migrateDrinks,
+};

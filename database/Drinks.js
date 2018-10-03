@@ -1,5 +1,5 @@
-const sequelize = require('./sequelize');
 const Sequelize = require('sequelize');
+const sequelize = require('./sequelize');
 
 const Drink = sequelize.define('Drink', {
   drink_name: Sequelize.STRING,

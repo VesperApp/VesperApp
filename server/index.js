@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
 const drink = require('../database/drinks.js');
 const user = require('../database/users.js');
 const ingredient = require('../database/ingredients.js');
 
 // const user = require('../database/user.js')
-const bcrypt = require('bcrypt');
-const session = require('express-session');
 
 const app = express();
 
