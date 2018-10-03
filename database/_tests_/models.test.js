@@ -80,4 +80,11 @@ describe('test migration: [Function migrateDrinks]', () => {
     });
   });
 });
-//hi
+
+test('should insert a drink with ingredients', () =>
+  Drink.create({
+    drink_name: 'awesome drink',
+    instructions: 'Just mix them together.',
+  })
+    .then(drink => drink.addIngredients([1, 2, 3]))
+    .then(drinkIngredients => expect(drinkIngredients[0].length).toBe(3)));
