@@ -1,7 +1,8 @@
 const { sequelize } = require('../associate');
+const DrinksData = require('../data/drinks');
 
 /**
- * Clear out  test database before all tests.
+ * Clear out test database before all tests.
  */
 const truncateTables = () =>
   sequelize
@@ -14,4 +15,20 @@ const truncateTables = () =>
  */
 const endConnection = () => sequelize.close();
 
-module.exports = { truncateTables, endConnection };
+/**
+ * Count all the ingredients in raw drinks data(json).
+ */
+const countDrinkIngredients = () => {
+  let count = 0;
+  DrinksData.forEach(drink => {
+    for (let i = 1; i <= 15; i += 1) {
+      const strIngredient = drink[`strIngredient${i}`].trim();
+      if (strIngredient !== '') {
+        count += 1;
+      }
+    }
+  });
+  return count;
+};
+
+module.exports = { truncateTables, endConnection, countDrinkIngredients };
