@@ -1,5 +1,5 @@
-const sequelize = require('./sequelize');
 const Sequelize = require('sequelize');
+const sequelize = require('./sequelize');
 
 const DrinkIngredient = sequelize.define('DrinkIngredient', {
   id: {

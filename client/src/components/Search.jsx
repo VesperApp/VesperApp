@@ -1,7 +1,7 @@
 import React from 'react';
 
 import IngredientList from './IngredientList.jsx';
-import Autocomplete from 'react-autocomplete'
+import Autocomplete from 'react-autocomplete';
 
 class Search extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Search extends React.Component {
    * @param {object} e - Event object.
    */
   inputHandler(e) {
-    this.setState({serchInput: e.target.value});
+    this.setState({ serchInput: e.target.value });
   }
 
   /**
@@ -34,7 +34,7 @@ class Search extends React.Component {
   addItem(e) {
     e.preventDefault();
 
-    let {listIngredients, serchInput} = this.state;
+    let { listIngredients, serchInput } = this.state;
     const upperedSerchInput = serchInput.trim().toUpperCase();
 
     // using loop because we need to turn keys into uppercase
@@ -53,10 +53,10 @@ class Search extends React.Component {
         listIngredients: [...listIngredients, addedIngre],
         serchInput: '',
         errMsg: '',
-        showListengredientComponent: false
+        showListengredientComponent: false,
       });
     } else {
-      this.setState({errMsg: `${serchInput} is not a valid ingredient :(`});
+      this.setState({ errMsg: `${serchInput} is not a valid ingredient :(` });
     }
   }
 
@@ -70,7 +70,7 @@ class Search extends React.Component {
     const index = ingredients.indexOf(item);
     ingredients.splice(index, 1);
     this.setState({
-      listIngredients: ingredients
+      listIngredients: ingredients,
     });
   }
 
@@ -80,9 +80,7 @@ class Search extends React.Component {
    * @param {object} value - Input value of search bar.
    */
   matchStateToTerm(item, value) {
-    return value && (
-      item.label.toLowerCase().indexOf(value.toLowerCase()) !== -1
-    )
+    return value && item.label.toLowerCase().indexOf(value.toLowerCase()) !== -1;
   }
 
   /**
@@ -92,58 +90,50 @@ class Search extends React.Component {
   convertIntoArray(ingredientsObj) {
     const arr = [];
     for (let key in ingredientsObj) {
-      let ingre = {label: key};
+      let ingre = { label: key };
       arr.push(ingre);
     }
     return arr;
   }
 
   render() {
-    const {serchInput, listIngredients} = this.state;
-    const {handleSearchSubmit, validIngredients} = this.props;
+    const { serchInput, listIngredients } = this.state;
+    const { handleSearchSubmit, validIngredients } = this.props;
     const wrapperStyle = {
-      display: "inline-block",
-      width: "88%",
-      border: "none",
-      height: "40px",
-      background: "#eee",
-      lineHeight: "40px",
-      paddingLeft: "10px",
-      marginLeft: "5px",
-      borderRadius: "50px",
-      zIndex:"3"
+      display: 'inline-block',
+      width: '88%',
+      border: 'none',
+      height: '40px',
+      background: '#eee',
+      lineHeight: '40px',
+      paddingLeft: '10px',
+      marginLeft: '5px',
+      borderRadius: '50px',
+      zIndex: '3',
     };
     return (
       <div className="search">
         <form className="searchView">
-          <div className="title">
-            What drink ingredients do you have?
-          </div>
+          <div className="title">What drink ingredients do you have?</div>
           <Autocomplete
-            inputProps={{className:"searchInput"}}
+            inputProps={{ className: 'searchInput' }}
             wrapperStyle={wrapperStyle}
-            getItemValue={(item) => item.label}
+            getItemValue={item => item.label}
             items={this.convertIntoArray(validIngredients)}
-            renderItem={(item, isHighlighted) =>
-              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                {item.label}
-              </div>
-            }
+            renderItem={(item, isHighlighted) => (
+              <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>{item.label}</div>
+            )}
             value={serchInput}
             onChange={this.inputHandler}
             onSelect={value => this.setState({ serchInput: value })}
             shouldItemRender={this.matchStateToTerm}
           />
-          <input onClick={this.addItem} type='submit' value = 'Add'/>
+          <input onClick={this.addItem} type="submit" value="Add" />
           <span>{this.state.errMsg}</span>
-          </form>
-          <IngredientList
-            onSubmit={handleSearchSubmit}
-            onRemove={this.removeItem}
-            ingredients={listIngredients}
-          />
+        </form>
+        <IngredientList onSubmit={handleSearchSubmit} onRemove={this.removeItem} ingredients={listIngredients} />
       </div>
-    )
+    );
   }
 }
 
