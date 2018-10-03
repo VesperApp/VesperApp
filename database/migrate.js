@@ -64,16 +64,6 @@ async function migrateOneDrink(drinkData) {
   await addCategoryForOneDrink(createdDrink, drinkData);
 }
 
-// const migrateOneDrink = drinkData =>
-//   Drink.create({
-//     drink_name: drinkData.strDrink,
-//     picture_url: drinkData.strDrinkThumb,
-//   }).then(createdDrink =>
-//     addIngredientsForOneDrink(createdDrink, drinkData)
-//       .then(() => addGlassForOneDrink(createdDrink, drinkData))
-//       .then(() => addCategoryForOneDrink(createdDrink, drinkData))
-//   );
-
 const migrateCategories = () =>
   Category.bulkCreate(CategoriesData.map(record => ({ category_name: record.strCategory })));
 
