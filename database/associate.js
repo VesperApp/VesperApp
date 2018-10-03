@@ -15,11 +15,18 @@ User.hasMany(Drink, { foreignKey: 'creator_ID' });
 
 Category.hasMany(Drink, { foreignKey: 'category_ID' });
 Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
+Drink.belongsTo(Category, { foreignKey: 'category_ID' });
+Drink.belongsTo(Glass, { foreignKey: 'glass_ID' });
 
-Drink.belongsToMany(Ingredient, { through: DrinkIngredient });
-Ingredient.belongsToMany(Drink, { through: DrinkIngredient });
+Drink.belongsToMany(Ingredient, { through: { model: DrinkIngredient, unique: false } });
+Ingredient.belongsToMany(Drink, { through: { model: DrinkIngredient, unique: false } });
 
-sequelize.sync();
+/**
+ * Don't sync when running tests, otherwise it might affect the test results.
+ */
+if (process.env.NODE_ENV !== 'test') {
+  sequelize.sync();
+}
 
 module.exports = {
   sequelize,
@@ -29,4 +36,5 @@ module.exports = {
   Glass,
   Ingredient,
   Favorite,
+  DrinkIngredient,
 };
