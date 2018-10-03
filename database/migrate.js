@@ -45,7 +45,11 @@ const addIngredientsForOneDrink = (drinkModel, drinkData) => {
     const execution = Ingredient.findOrCreate({ where: { ingredient_name: strIngredient } }).spread(
       (ingredient, created) => {
         ingredient.DrinkIngredient = { measurement: strMeasure };
+<<<<<<< HEAD
         return drinkModel.addIngredient(ingredient, { through: { measurement: '' } }).catch(err => console.log(err));
+=======
+        drinkModel.addIngredient(ingredient, { through: { measurement: '' } });
+>>>>>>> code clean up
       }
     );
     executions.push(execution);
@@ -53,15 +57,23 @@ const addIngredientsForOneDrink = (drinkModel, drinkData) => {
   return Promise.all(executions);
 };
 
+<<<<<<< HEAD
+=======
+// const drinkData = DrinksData[0];
+>>>>>>> code clean up
 const migrateOneDrink = drinkData =>
   Drink.create({
     drink_name: drinkData.strDrink,
     picture_url: drinkData.strDrinkThumb,
+<<<<<<< HEAD
   }).then(createdDrink =>
     addIngredientsForOneDrink(createdDrink, drinkData)
       .then(() => addGlassForOneDrink(createdDrink, drinkData))
       .then(() => addCategoryForOneDrink(createdDrink, drinkData))
   );
+=======
+  }).then(createdDrink => addIngredientsForOneDrink(createdDrink, drinkData));
+>>>>>>> code clean up
 
 const migrateDrinks = () => {
   const executions = [];
@@ -74,6 +86,10 @@ const migrateDrinks = () => {
 
 const migrateCategories = () =>
   Category.bulkCreate(CategoriesData.map(record => ({ category_name: record.strCategory })));
+<<<<<<< HEAD
+=======
+
+>>>>>>> code clean up
 const migrateGlasses = () => Glass.bulkCreate(GlassesData.map(record => ({ glass_name: record.strGlass })));
 
 const migrateIngredients = () =>
@@ -87,4 +103,24 @@ migrateCategories()
   .then(migrateIngredients)
   .then(migrateDrinks);
 
+<<<<<<< HEAD
 module.exports = { migrateCategories, migrateGlasses, migrateIngredients, migrateDrinks };
+=======
+module.exports = { migrateCategories, migrateGlasses, migrateIngredients };
+
+/*
+  *Add glass relationship for one drink 
+*/
+// const addGlassForOneDrink = (drinkModel, drinkData) => {
+//   //get glass from drinkData
+//   const glassName = drinkData.strGlass.trim(); //why the trim turns undefined into string?
+
+//   //query for glass
+//   return Glass.findOrCreate({ where: { glass_name: glassName } })
+//     .spread((glass, created) => {
+//       //add relationship to drink
+//       glass.addDrinks([drinkModel]);
+//     })
+//     .catch(e => console.log(e));
+// };
+>>>>>>> code clean up
