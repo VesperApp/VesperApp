@@ -18,7 +18,6 @@ Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
 Drink.belongsTo(Category, { foreignKey: 'category_ID' });
 Drink.belongsTo(Glass, { foreignKey: 'glass_ID' });
 
-<<<<<<< HEAD
 Drink.belongsToMany(Ingredient, { through: { model: DrinkIngredient, unique: false } });
 Ingredient.belongsToMany(Drink, { through: { model: DrinkIngredient, unique: false } });
 
@@ -28,12 +27,6 @@ Ingredient.belongsToMany(Drink, { through: { model: DrinkIngredient, unique: fal
 if (process.env.NODE_ENV !== 'test') {
   sequelize.sync();
 }
-=======
-Drink.belongsToMany(Ingredient, { through: DrinkIngredient });
-Ingredient.belongsToMany(Drink, { through: DrinkIngredient });
-
-sequelize.sync();
->>>>>>> code clean up
 
 module.exports = {
   sequelize,

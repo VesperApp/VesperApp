@@ -31,11 +31,7 @@ describe.each([
   [migrateCategories, Category, CategoriesData, 'category_name', 'strCategory'],
   [migrateGlasses, Glass, GlassesData, 'glass_name', 'strGlass'],
   [migrateIngredients, Ingredient, IngredientsData, 'ingredient_name', 'strIngredient1'],
-<<<<<<< HEAD
 ])('test migration: %p', (migrate, model, rawData, modelField, rawDataField) => {
-=======
-])('test %p', (migrate, model, rawData, modelField, rawDataField) => {
->>>>>>> code clean up
   beforeAll(() => migrate());
 
   test('should have same amount of records as raw data(json)', () =>
@@ -52,7 +48,6 @@ describe.each([
   });
 });
 
-<<<<<<< HEAD
 describe('test migration: [Function migrateDrinks]', () => {
   beforeAll(() => migrateDrinks());
 
@@ -85,12 +80,3 @@ describe('test migration: [Function migrateDrinks]', () => {
     });
   });
 });
-=======
-test('should insert a drink with ingredients', () =>
-  Drink.create({
-    drink_name: 'awesome drink',
-    instructions: 'Just mix them together.',
-  })
-    .then(drink => drink.addIngredients([1, 2, 3]))
-    .then(drinkIngredients => expect(drinkIngredients[0].length).toBe(3)));
->>>>>>> code clean up
