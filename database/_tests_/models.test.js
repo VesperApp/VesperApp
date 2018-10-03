@@ -25,24 +25,23 @@ describe('check the environment', () => {
 describe.each([
   [migrateCategories, Category, CategoriesData, 'category_name', 'strCategory'],
   [migrateGlasses, Glass, GlassesData, 'glass_name', 'strGlass'],
-  [migrateIngredients, Ingredient, IngredientsData, 'ingredient_name', 'strIngredient1']])(
-  'test %p',
-  (migrate, model, rawData, modelField, rawDataField) => {
-    beforeAll(() => migrate());
+  [migrateIngredients, Ingredient, IngredientsData, 'ingredient_name', 'strIngredient1'],
+])('test %p', (migrate, model, rawData, modelField, rawDataField) => {
+  beforeAll(() => migrate());
 
-    test('should have same amount of records as raw data(json)', () => model.findAll()
-      .then(records => expect(records.length).toEqual(rawData.length)));
+  test('should have same amount of records as raw data(json)', () =>
+    model.findAll().then(records => expect(records.length).toEqual(rawData.length)));
 
-    test('should have the same first record as raw data(json)', () => model.findAll()
-      .then(records => expect(records[0][modelField]).toEqual(rawData[0][rawDataField])));
+  test('should have the same first record as raw data(json)', () =>
+    model.findAll().then(records => expect(records[0][modelField]).toEqual(rawData[0][rawDataField])));
 
-    test('should have the same last record as raw data(json)', () => {
-      const lastIndex = rawData.length - 1;
-      return model.findAll().then(records => expect(records[lastIndex][modelField])
-        .toEqual(rawData[lastIndex][rawDataField]));
-    });
-  },
-);
+  test('should have the same last record as raw data(json)', () => {
+    const lastIndex = rawData.length - 1;
+    return model
+      .findAll()
+      .then(records => expect(records[lastIndex][modelField]).toEqual(rawData[lastIndex][rawDataField]));
+  });
+});
 
 test('should insert a drink with ingredients', () =>
   Drink.create({
