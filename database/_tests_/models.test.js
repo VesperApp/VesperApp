@@ -52,7 +52,7 @@ describe.each([
 describe('test migration: [Function migrateDrinks]', () => {
   beforeAll(() => migrateDrinks());
 
-  describe('check the associations between Drinks and Ingredients', () => {
+  describe('check the associations between Ingredients and Drinks', () => {
     test('should have same amount of records in DrinkIngredients as raw data(json)', () => {
       const count = countDrinkIngredients();
       return DrinkIngredient.findAll({}).then(records => expect(records.length).toEqual(count));
