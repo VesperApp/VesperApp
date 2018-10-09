@@ -12,7 +12,7 @@ const DrinkIngredient = sequelize.define('DrinkIngredient', {
   measurement: Sequelize.STRING,
 });
 
-//input is an array composed of drink IDs: [22,39]
+//get drinks from array of ingredients. input is an array composed of drink IDs: [22,39]
 const getDrinksFromIngredients = async ingredients => {
   let ingredientQueryFragment = '';
 
