@@ -63,7 +63,7 @@ describe('test migration: [Function migrateDrinks]', () => {
     ['Glasses', 'strGlass', 'glass_name', 'Glass', Glass],
     ['Categories', 'strCategory', 'category_name', 'Category', Category],
   ])('check the associations between %s and Drinks', (title, rawDataFiled, modelField, modelName, model) => {
-    test('should have the same glass as raw data(json) in the first record', () => {
+    test(`should have the same ${modelName.toLowerCase()} as raw data(json) in the first record`, () => {
       const fieldValue = DrinksData[0][rawDataFiled];
       const drinkName = DrinksData[0].strDrink;
       return Drink.findOne({ where: { drink_name: drinkName }, include: [model] }).then(drink => {
@@ -71,7 +71,7 @@ describe('test migration: [Function migrateDrinks]', () => {
       });
     });
 
-    test('should have the same glass as raw data(json) in the last record', () => {
+    test(`should have the same ${modelName.toLowerCase()} as raw data(json) in the first record`, () => {
       const lastIndex = DrinksData.length - 1;
       const fieldValue = DrinksData[lastIndex][rawDataFiled];
       const drinkName = DrinksData[lastIndex].strDrink;
