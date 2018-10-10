@@ -13,6 +13,7 @@ const IngredientsData = require('../data/ingredients');
 const { sequelize, Drink, Category, Glass, Ingredient, DrinkIngredient } = require('../associate');
 const { migrateCategories, migrateGlasses, migrateIngredients, migrateDrinks } = require('../migrate');
 const { truncateTables, endConnection, countDrinkIngredients } = require('./util');
+const { getDrinksFromIngredients } = require('../DrinkIngredients');
 
 jest.setTimeout(30000);
 beforeAll(() => truncateTables());
@@ -78,5 +79,20 @@ describe('test migration: [Function migrateDrinks]', () => {
         expect(drink[modelName][modelField]).toEqual(fieldValue);
       });
     });
+  });
+});
+
+test('should insert a drink with ingredients', () =>
+  Drink.create({
+    drink_name: 'awesome drink',
+    instructions: 'Just mix them together.',
+  })
+    .then(drink => drink.addIngredients([1, 2, 3]))
+    .then(drinkIngredients => expect(drinkIngredients[0].length).toBe(3)));
+
+describe('check if return drinks given ingredients query is working', () => {
+  test('should return 10 drinks', async () => {
+    const output = await getDrinksFromIngredients([22, 39]);
+    await expect(output.length).toBe(10);
   });
 });

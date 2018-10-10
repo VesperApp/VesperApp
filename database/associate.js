@@ -5,7 +5,7 @@ const Drink = require('./Drinks');
 const Category = require('./Categories');
 const Glass = require('./Glasses');
 const Ingredient = require('./Ingredients');
-const DrinkIngredient = require('./DrinkIngredients');
+const { DrinkIngredient } = require('./DrinkIngredients');
 
 const Favorite = require('./Favorites');
 

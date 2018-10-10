@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 
-const drink = require('../database/drinks.js');
-const user = require('../database/users.js');
-const ingredient = require('../database/ingredients.js');
+const drink = require('../database/Drinks.js');
+const user = require('../database/Users.js');
+const ingredient = require('../database/Ingredients.js');
 
 // const user = require('../database/user.js')
 
@@ -105,22 +105,22 @@ app.get('/ingredients', (req, res) => {
   });
 });
 
-/************************************************************/
+/** ********************************************************* */
 // Authentication routes here
-/************************************************************/
+/** ********************************************************* */
 
-//on signup - client req should have:
+// on signup - client req should have:
 // req.body.username
 // req.body.password
 // req.body.email
 
-//signup: if successful signup will return true. If erorr on signup will return database error.
+// signup: if successful signup will return true. If erorr on signup will return database error.
 app.post('/signup', function(req, res) {
-  //create a hash:
+  // create a hash:
   bcrypt.hash(req.body.password, 1, function(err, hash) {
-    //reset the req password as the hash
+    // reset the req password as the hash
     req.body.password = hash;
-    //send req to save user to database
+    // send req to save user to database
     user.register(req, function(err, data) {
       if (err) {
         res.send(err);
@@ -132,12 +132,12 @@ app.post('/signup', function(req, res) {
   });
 });
 
-//on login - client req should have:
+// on login - client req should have:
 // req.body.username
 // req.body.password
 
-//route login will return: true/false given username/password.
-//if true a session will be created.
+// route login will return: true/false given username/password.
+// if true a session will be created.
 app.post('/login', function(req, res) {
   user.login(req, function(err, data) {
     if (err) {
@@ -161,8 +161,8 @@ app.post('/login', function(req, res) {
   });
 });
 
-//logout: destroy session:
-//returns true if session destroyed, flase if error.
+// logout: destroy session:
+// returns true if session destroyed, flase if error.
 app.get('/logout', function(req, res) {
   req.session.destroy(function(err) {
     // cannot access session here
@@ -174,7 +174,7 @@ app.get('/logout', function(req, res) {
   });
 });
 
-//create a session - helper function:
+// create a session - helper function:
 var createSession = function(req, res, userName) {
   req.session.regenerate(function(err) {
     // will have a new session here
@@ -183,7 +183,7 @@ var createSession = function(req, res, userName) {
   });
 };
 
-//check if session is valid - helper functon:
+// check if session is valid - helper functon:
 var checkSession = function(req, res, next) {
   if (req.session.user) {
     next();
