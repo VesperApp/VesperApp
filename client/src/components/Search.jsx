@@ -10,7 +10,6 @@ class Search extends React.Component {
       listIngredients: [],
       serchInput: '',
       errMsg: '',
-      //showListengredientComponent: false
     };
 
     this.inputHandler = this.inputHandler.bind(this);
@@ -19,7 +18,7 @@ class Search extends React.Component {
   }
 
   /**
-   * User type soneting in the search bar.
+   * User type someting in the search bar.
    * @param {object} e - Event object.
    */
   inputHandler(e) {
@@ -33,7 +32,7 @@ class Search extends React.Component {
   addItem(e) {
     e.preventDefault();
 
-    let { listIngredients, serchInput } = this.state;
+    const { listIngredients, serchInput } = this.state;
     const upperedSerchInput = serchInput.trim().toUpperCase();
 
     // using loop because we need to turn keys into uppercase
@@ -52,7 +51,6 @@ class Search extends React.Component {
         listIngredients: [...listIngredients, addedIngre],
         serchInput: '',
         errMsg: '',
-        showListengredientComponent: false,
       });
     } else {
       this.setState({ errMsg: `${serchInput} is not a valid ingredient :(` });
@@ -83,7 +81,7 @@ class Search extends React.Component {
   }
 
   /**
-   * Convert object of ingredients in an array.
+   * Convert object of ingredients into an array.
    * @param {object} ingredientsObj - Object with ingredients as properties keys.
    */
   convertIntoArray(ingredientsObj) {
@@ -93,6 +91,7 @@ class Search extends React.Component {
       arr.push(ingre);
     }
     return arr;
+    // return Object.keys(ingredientsObj);
   }
 
   render() {

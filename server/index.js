@@ -37,10 +37,10 @@ app.get('/ingredients', async (req, res) => {
 // client req (req.body) structured as object with ingredients as key. This function will convert the req object into an array.
 // response is an array containing matched drink objects.
 app.post('/drinksByIngredient', async (req, res) => {
-  // console.log('this is the req');
-  // console.log(req.body);
+  console.log('this is the req');
+  console.log(req.body);
   try {
-    const response = await getDrinksFromIngredients(Object.keys(req.body));
+    const response = await getDrinksFromIngredients(Object.values(req.body));
     res.send(response);
   } catch (e) {
     res.status(500).send('GET /drinks by ingredients failed');
