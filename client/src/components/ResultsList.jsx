@@ -1,5 +1,5 @@
 import React from 'react';
-import CocktailDetails from './CocktailDetails.jsx';
+import CocktailDetails from './CocktailDetails';
 
 class ResultsList extends React.Component {
   constructor(props) {

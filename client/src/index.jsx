@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import axios from 'axios';
 
-import user from '../../database/data/user.js';
+import user from '../../database/data/user';
 
-import Header from './components/Header.jsx';
-import Search from './components/Search.jsx';
-import ResultsList from './components/ResultsList.jsx';
-import IngredirentList from './components/IngredientList.jsx';
-import FavoriteList from './components/FavoriteList.jsx';
-import CocktailDetails from './components/CocktailDetails.jsx';
-import Footer from './components/Footer.jsx';
+import Header from './components/Header';
+import Search from './components/Search';
+import ResultsList from './components/ResultsList';
+import IngredirentList from './components/IngredientList';
+import FavoriteList from './components/FavoriteList';
+import CocktailDetails from './components/CocktailDetails';
+import Footer from './components/Footer';
 
 class App extends React.Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class App extends React.Component {
     e.stopPropagation();
 
     const { user } = this.state;
-    //copy the array
+    // copy the array
     let favDrinks = [...user.favDrinks];
     for (let i = 0; i < favDrinks.length; i++) {
       if (favDrinks[i]._id === drink._id) {

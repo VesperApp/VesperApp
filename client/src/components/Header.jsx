@@ -1,9 +1,9 @@
 import React from 'react';
+import Login from './Login';
+import SignUp from './SignUp';
+import Search from './Search';
+import FakeFavorisdrink from './FakeFavorisdrink';
 
-import Login from './Login.jsx';
-import SignUp from './SignUp.jsx';
-import Search from './Search.jsx';
-import FakeFavorisdrink from './FakeFavorisdrink.jsx';
 class Header extends React.Component {
   constructor(props) {
     super(props);
