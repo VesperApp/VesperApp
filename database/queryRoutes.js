@@ -2,7 +2,10 @@ const sequelize = require('./sequelize');
 
 const { Category, Glass, Ingredient, Drink } = require('./associate');
 
-// get drinks from array of ingredients. input is an array composed of drink IDs: [22,39]
+/* ****************** ******************
+get drinks from array of ingredients. 
+input is an array composed of drink IDs: [22,39]
+****************** ****************** */
 const getDrinksFromIngredients = async ingredients => {
   let ingredientQueryFragment = '';
 
@@ -37,8 +40,31 @@ const getDrinksFromIngredients = async ingredients => {
   return Promise.all(finalResults);
 };
 
+/* ****************** ******************
+get object of unique ingredients
+****************** ****************** */
+const getIngredientsList = async () => {
+  //   Ingredient.findAll({
+  //     attributes: ['id', 'ingredient_name'],
+  //   }).then(ele => console.log(ele));
+
+  const ingredientArr = await sequelize.query('SELECT ingredient_name,id FROM `ingredients`', {
+    type: sequelize.QueryTypes.SELECT,
+  });
+
+  const ingredientHash = await {};
+
+  await ingredientArr.forEach(ele => {
+    const { ingredient_name, id } = ele;
+    ingredientHash[ingredient_name] = id;
+  });
+
+  return ingredientHash;
+};
+
 module.exports = {
   getDrinksFromIngredients,
+  getIngredientsList,
 };
 
 // non async await pattern of 2nd half of query function:
@@ -65,16 +91,15 @@ module.exports = {
     });
 */
 
-/* manual test of query function:   
- 
+// manual test of query function:
+/*
 async function hi() {
-   let hi2 = await getDrinksFromIngredients([22, 39]);
-   await console.log('*********');
-   await console.log(JSON.stringify(hi2));
-   await console.log('*********');
-   return hi2;
- }
+  let hi2 = await getDrinksFromIngredients([22, 39]);
+  await console.log('*********');
+  await console.log(JSON.stringify(hi2));
+  await console.log('*********');
+  return hi2;
+}
 
- hi();
-
- */
+hi();
+*/

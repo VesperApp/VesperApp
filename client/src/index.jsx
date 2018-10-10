@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import axios from 'axios';
 
 import user from '../../database/data/user';
@@ -63,7 +62,6 @@ class App extends React.Component {
       return;
     }
 
-    let drinks = [];
     const postData = ingredients.reduce((obj, ingre) => {
       obj[ingre] = 1;
       return obj;

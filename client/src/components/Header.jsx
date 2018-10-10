@@ -114,6 +114,7 @@ class Header extends React.Component {
             */}
           </div>
           <div className="appName">Andy's Tropical Beach Party</div>
+          {/*
           <div className="boxBtn">
             {this.state.user == true ? null : (
               <div className="login btn" onClick={this.showLoginComponent}>
@@ -137,6 +138,7 @@ class Header extends React.Component {
               </div>
             )}
           </div>
+          */}
         </div>
 
         <div className="insertComponent">

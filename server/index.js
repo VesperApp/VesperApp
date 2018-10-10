@@ -3,9 +3,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 
-const drink = require('../database/Drinks.js');
 const user = require('../database/Users.js');
-const ingredient = require('../database/Ingredients.js');
+const { getIngredientsList, getDrinksFromIngredients } = require('../database/queryRoutes.js');
 
 // const user = require('../database/user.js')
 
@@ -14,7 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true, useNewUrlParser: true }));
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(`${__dirname}/../client/dist`));
 
 app.use(
   session({
@@ -24,54 +23,31 @@ app.use(
   })
 );
 
-// GET: (DEBUGGER route) return all drinks
-app.get('/drinks', (req, res) => {
-  drink.findAll((err, drinks) => {
-    if (err) {
-      res.status(500).send('GET /drinks failed');
-    } else {
-      res.status(200).send(drinks);
-    }
-  });
+// Return all ingredients, precursor to search function
+app.get('/ingredients', async (req, res) => {
+  try {
+    const ingredientsArray = await getIngredientsList();
+    res.status(200).send(ingredientsArray);
+  } catch (e) {
+    res.status(500).send('GET /ingredients failed');
+  }
 });
 
 // GET: main search funtion: return all drinks by target ingredient list.
 // client req (req.body) structured as object with ingredients as key. This function will convert the req object into an array.
 // response is an array containing matched drink objects.
-app.post('/drinksByIngredient', (req, res) => {
-  drink.selectDrinkByigredients(Object.keys(req.body), function(err, data) {
-    if (err) {
-      console.log('QUERY error', error);
-      res.send(err);
-    } else {
-      console.log('the drinks returned from the database', data);
-      res.send(data);
-    }
-  });
+app.post('/drinksByIngredient', async (req, res) => {
+  // console.log('this is the req');
+  // console.log(req.body);
+  try {
+    const response = await getDrinksFromIngredients(Object.keys(req.body));
+    res.send(response);
+  } catch (e) {
+    res.status(500).send('GET /drinks by ingredients failed');
+  }
 });
 
-// POST: (DEBUGGER route) migrate data from drinks.js into mongodb
-app.post('/data/reset', (req, res) => {
-  drink.migrate((err, drinks) => {
-    if (err) {
-      res.status(500).send('POST /drink migration failed');
-    } else {
-      ingredient.migrate((err, ingredients) => {
-        if (err) {
-          res
-            .status(500)
-            .send(
-              `POST /migrate failed. Ensure drink data (/drinks) has been successfully loaded first. Error: ${err}`
-            );
-        } else {
-          res.status(201).send(`SUCCESS migrated drinks and ingredients data successfully!`);
-        }
-      });
-    }
-  });
-});
-
-//TODO: POST: add a favorite drink , someone clicks like then:
+// TODO: POST: add a favorite drink , someone clicks like then:
 app.post('/user/addFavDrink', (req, res) => {
   user.addFavDrink(req.body, (err, data) => {
     if (err) {
@@ -83,24 +59,13 @@ app.post('/user/addFavDrink', (req, res) => {
   });
 });
 
-//TODO: POST: remove a favorite drink
+// TODO: POST: remove a favorite drink
 app.post('/user/removeFavDrink', (req, res) => {
   user.removeFavDrinks(req.body, (err, data) => {
     if (err) {
       console.log('Post removeFavDrink failed');
     } else {
       res.status(200).send(data);
-    }
-  });
-});
-
-// TODO: GET: (DEBUGGER route) return all ingredients
-app.get('/ingredients', (req, res) => {
-  ingredient.findAll((err, drinks) => {
-    if (err) {
-      res.status(500).send('GET /ingredients failed');
-    } else {
-      res.status(200).send(drinks[0]);
     }
   });
 });
