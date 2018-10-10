@@ -13,7 +13,7 @@ const IngredientsData = require('../data/ingredients');
 const { sequelize, Drink, Category, Glass, Ingredient, DrinkIngredient } = require('../associate');
 const { migrateCategories, migrateGlasses, migrateIngredients, migrateDrinks } = require('../migrate');
 const { truncateTables, endConnection, countDrinkIngredients } = require('./util');
-const { getDrinksFromIngredients } = require('../DrinkIngredients');
+const { getDrinksFromIngredients } = require('../queryRoutes');
 
 jest.setTimeout(30000);
 beforeAll(() => truncateTables());
