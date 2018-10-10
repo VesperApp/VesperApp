@@ -1,7 +1,6 @@
 import React from 'react';
-
-import IngredientList from './IngredientList.jsx';
 import Autocomplete from 'react-autocomplete';
+import IngredientList from './IngredientList';
 
 class Search extends React.Component {
   constructor(props) {

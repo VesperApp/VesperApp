@@ -1,9 +1,9 @@
 import React from 'react';
+import Login from './Login';
+import SignUp from './SignUp';
+import Search from './Search';
+import FakeFavorisdrink from './FakeFavorisdrink';
 
-import Login from './Login.jsx';
-import SignUp from './SignUp.jsx';
-import Search from './Search.jsx';
-import FakeFavorisdrink from './FakeFavorisdrink.jsx';
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -114,6 +114,7 @@ class Header extends React.Component {
             */}
           </div>
           <div className="appName">Andy's Tropical Beach Party</div>
+          {/*
           <div className="boxBtn">
             {this.state.user == true ? null : (
               <div className="login btn" onClick={this.showLoginComponent}>
@@ -137,6 +138,7 @@ class Header extends React.Component {
               </div>
             )}
           </div>
+          */}
         </div>
 
         <div className="insertComponent">

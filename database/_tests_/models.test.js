@@ -13,7 +13,7 @@ const IngredientsData = require('../data/ingredients');
 const { sequelize, Drink, Category, Glass, Ingredient, DrinkIngredient } = require('../associate');
 const { migrateCategories, migrateGlasses, migrateIngredients, migrateDrinks } = require('../migrate');
 const { truncateTables, endConnection, countDrinkIngredients } = require('./util');
-const { getDrinksFromIngredients } = require('../DrinkIngredients');
+const { getDrinksFromIngredients, getIngredientsList } = require('../queryRoutes');
 
 jest.setTimeout(30000);
 beforeAll(() => truncateTables());
@@ -94,5 +94,12 @@ describe('check if return drinks given ingredients query is working', () => {
   test('should return 10 drinks', async () => {
     const output = await getDrinksFromIngredients([22, 39]);
     await expect(output.length).toBe(10);
+  });
+});
+
+describe('get ingredient list should return a hashtable filled with ingredients and ids', () => {
+  test('should return 287', async () => {
+    const output = await getIngredientsList();
+    await expect(Object.keys(output).length).toBe(287);
   });
 });
