@@ -15,4 +15,7 @@ module.exports = {
     dialect: 'mysql',
     insecureAuth: true,
   },
+  heroku: {
+    host: process.env.CLEARDB_DATABASE_URL,
+  },
 };
