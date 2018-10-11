@@ -140,7 +140,7 @@ app.get('/logout', function(req, res) {
 });
 
 // create a session - helper function:
-var createSession = function(req, res, userName) {
+let createSession = function(req, res, userName) {
   req.session.regenerate(function(err) {
     // will have a new session here
     req.session.user = userName;
@@ -149,7 +149,7 @@ var createSession = function(req, res, userName) {
 };
 
 // check if session is valid - helper functon:
-var checkSession = function(req, res, next) {
+const checkSession = function(req, res, next) {
   if (req.session.user) {
     next();
   } else {
@@ -158,8 +158,9 @@ var checkSession = function(req, res, next) {
 };
 
 if (process.env.node_env !== 'test') {
-  app.listen(3000, function() {
-    console.log('listening on port 3000!');
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`listening on port ${port}!`);
   });
 } else {
   // for jest testing
