@@ -41,8 +41,8 @@ class ResultsList extends React.Component {
     const TableRows = this.props.drinks.map((drink, i) => (
       <tr onClick={e => this.handleRowClick(e, drink)} key={i}>
         <th scope="row">{i + 1}</th>
-        <td>{drink.strDrink}</td>
-        <td>{drink.strCategory}</td>
+        <td>{drink.drink_name}</td>
+        <td>{drink.Category.category_name}</td>
         <td>
           <a>
             <span className="glyphicon glyphicon-thumbs-up" />
