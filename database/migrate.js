@@ -57,6 +57,7 @@ async function migrateOneDrink(drinkData) {
   const createdDrink = await Drink.create({
     drink_name: drinkData.strDrink,
     picture_url: drinkData.strDrinkThumb,
+    instructions: drinkData.strInstructions,
   });
 
   await addIngredientsForOneDrink(createdDrink, drinkData);
