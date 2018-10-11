@@ -18,7 +18,7 @@ const getDrinksFromIngredients = async ingredients => {
   });
 
   const results = await sequelize.query(
-    `SELECT DrinkIngredients.DrinkID, Drinks.drink_name, count(*) 
+    `SELECT DrinkIngredients.DrinkID, Drinks.drink_name, Drinks.instructions, count(*) 
       FROM DrinkIngredients INNER JOIN drinks 
       ON DrinkIngredients.DrinkID=Drinks.id 
       WHERE ${ingredientQueryFragment} 
