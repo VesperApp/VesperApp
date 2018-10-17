@@ -75,15 +75,10 @@ class Search extends React.Component {
    */
   removeItem(item) {
     // make a copy of array
-<<<<<<< HEAD
     console.log('REMOVE ', item);
     const { listIngredients } = this.state;
     const ingredients = [...listIngredients];
     console.log('REMOVE ', ingredients);
-=======
-    const { listIngredients } = this.state;
-    const ingredients = [...listIngredients];
->>>>>>> front end edits
     const index = ingredients.indexOf(item);
     ingredients.splice(index, 1);
     this.setState({
