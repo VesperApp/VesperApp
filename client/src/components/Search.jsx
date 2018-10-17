@@ -1,6 +1,6 @@
 import React from 'react';
 import Autocomplete from 'react-autocomplete';
-import IngredientList from './IngredientList';
+import IngredientList from './SearchIngredientList';
 
 class Search extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Search extends React.Component {
 
     this.state = {
       listIngredients: [],
-      serchInput: '',
+      searchInput: '',
       errMsg: '',
     };
 
@@ -22,7 +22,7 @@ class Search extends React.Component {
    * @param {object} e - Event object.
    */
   inputHandler(e) {
-    this.setState({ serchInput: e.target.value });
+    this.setState({ searchInput: e.target.value });
   }
 
   /**
@@ -32,16 +32,20 @@ class Search extends React.Component {
   addItem(e) {
     e.preventDefault();
 
-    const { listIngredients, serchInput } = this.state;
-    const upperedSerchInput = serchInput.trim().toUpperCase();
+    const { listIngredients, searchInput } = this.state;
+    const { validIngredients } = this.props;
+    const upperedSerchInput = searchInput.trim().toUpperCase();
 
     // using loop because we need to turn keys into uppercase
     let isValid = false;
     let addedIngre = null;
-    for (let ingre in this.props.validIngredients) {
-      if (ingre.toUpperCase() === upperedSerchInput) {
+
+    const ingredientsArr = Object.keys(validIngredients);
+
+    for (let i = 0; i < ingredientsArr.length; i++) {
+      if (ingredientsArr[i].toUpperCase() === upperedSerchInput) {
         isValid = true;
-        addedIngre = ingre;
+        addedIngre = ingredientsArr[i];
         break;
       }
     }
@@ -49,11 +53,11 @@ class Search extends React.Component {
     if (isValid) {
       this.setState({
         listIngredients: [...listIngredients, addedIngre],
-        serchInput: '',
+        searchInput: '',
         errMsg: '',
       });
     } else {
-      this.setState({ errMsg: `${serchInput} is not a valid ingredient :(` });
+      this.setState({ errMsg: `${searchInput} is not a valid ingredient :(` });
     }
   }
 
@@ -63,7 +67,8 @@ class Search extends React.Component {
    */
   removeItem(item) {
     // make a copy of array
-    const ingredients = [...this.state.listIngredients];
+    const { listIngredients } = this.state;
+    const ingredients = [...listIngredients];
     const index = ingredients.indexOf(item);
     ingredients.splice(index, 1);
     this.setState({
@@ -95,7 +100,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { serchInput, listIngredients } = this.state;
+    const { searchInput, listIngredients } = this.state;
     const { handleSearchSubmit, validIngredients } = this.props;
     const wrapperStyle = {
       display: 'inline-block',
@@ -121,9 +126,9 @@ class Search extends React.Component {
             renderItem={(item, isHighlighted) => (
               <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>{item.label}</div>
             )}
-            value={serchInput}
+            value={searchInput}
             onChange={this.inputHandler}
-            onSelect={value => this.setState({ serchInput: value })}
+            onSelect={value => this.setState({ searchInput: value })}
             shouldItemRender={this.matchStateToTerm}
           />
           <input onClick={this.addItem} type="submit" value="Add" />

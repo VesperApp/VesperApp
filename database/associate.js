@@ -9,13 +9,13 @@ const { DrinkIngredient } = require('./DrinkIngredients');
 
 const Favorite = require('./Favorites');
 
-// User.belongsToMany(Drink, { through: 'Favorites' });
 User.hasMany(Drink, { foreignKey: 'creator_ID' });
-// Drink.belongsToMany(User, { through: 'Favorites' });
+// Drink.belongsTo(User, { foreignKey: 'creator_ID' });
 
 Category.hasMany(Drink, { foreignKey: 'category_ID' });
-Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
 Drink.belongsTo(Category, { foreignKey: 'category_ID' });
+
+Glass.hasMany(Drink, { foreignKey: 'glass_ID' });
 Drink.belongsTo(Glass, { foreignKey: 'glass_ID' });
 
 Drink.belongsToMany(Ingredient, { through: { model: DrinkIngredient, unique: false } });

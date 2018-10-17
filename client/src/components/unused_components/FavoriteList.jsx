@@ -1,5 +1,5 @@
 import React from 'react';
-import CocktailDetails from './CocktailDetails';
+import CocktailDetails from '../CocktailDetails';
 
 /**
  * This component is not being used.
