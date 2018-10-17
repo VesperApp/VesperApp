@@ -1,5 +1,5 @@
 import React from 'react';
-import CocktailDetails from './CocktailDetails.jsx';
+import CocktailDetails from '../CocktailDetails.jsx';
 
 class FakeFavorisdrink extends React.Component {
   constructor(props) {

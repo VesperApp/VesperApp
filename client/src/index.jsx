@@ -7,9 +7,7 @@ import user from '../../database/data/user';
 import Header from './components/Header';
 import Search from './components/Search';
 import ResultsList from './components/ResultsList';
-import IngredirentList from './components/IngredientList';
-import FavoriteList from './components/FavoriteList';
-import CocktailDetails from './components/CocktailDetails';
+import FavoriteList from './components/unused_components/FavoriteList';
 import Footer from './components/Footer';
 
 class App extends React.Component {
