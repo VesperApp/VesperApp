@@ -8,7 +8,7 @@ input is an array composed of drink IDs: [22,39]
 ****************** ****************** */
 const getDrinksFromIngredients = async ingredients => {
   let ingredientQueryFragment = '';
-
+  console.log(ingredients);
   ingredients.forEach(ele => {
     if (ingredientQueryFragment === '') {
       ingredientQueryFragment = `IngredientID=${ele}`;

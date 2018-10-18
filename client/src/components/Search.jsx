@@ -35,17 +35,25 @@ class Search extends React.Component {
     const { listIngredients, searchInput } = this.state;
     const { validIngredients } = this.props;
     const upperedSerchInput = searchInput.trim().toUpperCase();
-
+    console.log('VALIIIID', validIngredients);
     // using loop because we need to turn keys into uppercase
     let isValid = false;
     let addedIngre = null;
 
-    const ingredientsArr = Object.keys(validIngredients);
+    // const ingredientsArr = Object.keys(validIngredients);
 
-    for (let i = 0; i < ingredientsArr.length; i++) {
-      if (ingredientsArr[i].toUpperCase() === upperedSerchInput) {
+    // for (let i = 0; i < ingredientsArr.length; i++) {
+    //   if (ingredientsArr[i].toUpperCase() === upperedSerchInput) {
+    //     isValid = true;
+    //     addedIngre = ingredientsArr[i];
+    //     break;
+    //   }
+    // }
+
+    for (let IngredientName in validIngredients) {
+      if (IngredientName.toUpperCase() === upperedSerchInput) {
         isValid = true;
-        addedIngre = ingredientsArr[i];
+        addedIngre = [IngredientName, validIngredients[IngredientName]];
         break;
       }
     }
@@ -67,8 +75,10 @@ class Search extends React.Component {
    */
   removeItem(item) {
     // make a copy of array
+    console.log('REMOVE ', item);
     const { listIngredients } = this.state;
     const ingredients = [...listIngredients];
+    console.log('REMOVE ', ingredients);
     const index = ingredients.indexOf(item);
     ingredients.splice(index, 1);
     this.setState({

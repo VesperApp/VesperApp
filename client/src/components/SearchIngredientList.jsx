@@ -2,10 +2,10 @@ import React from 'react';
 
 const IngredientList = props => {
   const { ingredients, onSubmit } = props;
-  const IngredientItems = ingredients.map((ingredient, i) => (
-    <div className="item" key={i}>
-      <span>{ingredient}</span>
-      <span onClick={() => props.onRemove(ingredient)} className="putRigth">
+  const IngredientItems = ingredients.map(ingredient => (
+    <div className="item" key={ingredient[1]}>
+      <span>{ingredient[0]}</span>
+      <span onClick={() => props.onRemove(ingredient[0])} className="putRigth">
         X
       </span>
     </div>
