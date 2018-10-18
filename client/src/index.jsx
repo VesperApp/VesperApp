@@ -59,11 +59,13 @@ class App extends React.Component {
     if (!ingredients.length) {
       return;
     }
-
+    // Convert tuples into an key-value pair.
     const postData = ingredients.reduce((obj, ingre) => {
-      obj[ingre] = 1;
+      obj[ingre[0]] = ingre[1];
       return obj;
     }, {});
+
+    console.log('!!!! ', postData);
 
     axios
       .post('/drinksByIngredient', postData)

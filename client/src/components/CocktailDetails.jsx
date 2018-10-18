@@ -18,7 +18,7 @@ const CocktailDetails = props => {
         <div onClick={onClose} className="content">
           <div className="title">{`${drink.drink_name}'s Recipe`}</div>
           <div className="recipe">
-            <img src={drink.picture_url} alt="drink" />
+            <img src={drink.picture_url} alt="drink" style={{ width: 200, height: 200 }} />
             <h2> Required ingredients: </h2>
 
             <table className="table">
