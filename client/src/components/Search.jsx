@@ -114,15 +114,12 @@ class Search extends React.Component {
     const { handleSearchSubmit, validIngredients } = this.props;
     const wrapperStyle = {
       display: 'inline-block',
-      width: '88%',
+      width: 'auto',
       border: 'none',
       height: '40px',
       background: '#eee',
       lineHeight: '40px',
-      paddingLeft: '10px',
-      marginLeft: '5px',
-      borderRadius: '50px',
-      zIndex: '3',
+      borderRadius: '6px',
     };
     return (
       <div className="search">
