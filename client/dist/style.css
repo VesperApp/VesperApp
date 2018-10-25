@@ -36,29 +36,28 @@ body {
 .CockTailDetailsView .content .detailTitle {
   background: #fff;
   margin: auto;
+  text-align: center;
   box-shadow: 0px 0px 1px #eee;
   font-size: 22px;
 }
 
 .CockTailDetailsView .content .recipe {
-  position: relative;
   background: #fff;
   width: 100%;
   margin: auto;
   top: 0;
   margin: auto;
   margin-top: 5px;
-  z-index: 4;
   padding: 20px;
 }
 
 .CockTailDetailsView .content .recipe img {
-  position: relative;
-  background: #fff;
-  width: 70%;
-  overflow: hidden;
+  display: block;
   margin: auto;
-  z-index: 4;
+  background: #fff;
+  width: 50%;
+  overflow: hidden;
+  text-align: center;
 }
 
 .listView tr {
@@ -133,8 +132,10 @@ table tr {
 }
 
 .search {
-  width: 70%;
+  width: auto;
   margin: auto;
+  padding: 10px;
+
   /* background: #fff; */
 }
 
@@ -176,6 +177,8 @@ table tr {
 }
 
 .ingredientLists {
+  margin: auto;
+  width: fit-content;
   color: #336699;
   height: auto;
   background: green;
@@ -195,6 +198,8 @@ table tr {
   margin: auto;
   margin-top: 20px;
   padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-family: 'Seaweed Script', cursive;
   text-align: center;
   color: white;
@@ -292,7 +297,7 @@ table tr {
 .contentModalView {
   position: relative;
   background: #fff;
-  width: 70%;
+  width: auto;
   box-shadow: 0px 0px 1px #ccc;
   height: 100%;
   margin: auto;
@@ -425,7 +430,7 @@ body {
 
 .searchInput {
   display: inline-block;
-  width: auto;
+  width: fit-content;
   border: none;
   height: 40px;
   background: #eee;
