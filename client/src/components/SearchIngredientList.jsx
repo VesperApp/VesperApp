@@ -13,7 +13,7 @@ const IngredientList = props => {
   if (ingredients.length > 0) {
     return (
       <div className="ingredientLists">
-        <div className="title">Your selected drink ingredients:</div>
+        <div className="ingredientTitle">Your selected drink ingredients:</div>
         {IngredientItems}
         <input onClick={e => onSubmit(e, ingredients)} type="submit" value="Submit" />
       </div>

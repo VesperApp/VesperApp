@@ -7,7 +7,6 @@ import user from '../../database/data/user';
 import Header from './components/Header';
 import Search from './components/Search';
 import ResultsList from './components/ResultsList';
-import FavoriteList from './components/unused_components/FavoriteList';
 import Footer from './components/Footer';
 
 class App extends React.Component {
@@ -122,7 +121,6 @@ class App extends React.Component {
         <Header />
         {search ? SearchComponent : ''}
         {resultList ? <ResultsList drinks={drinks} onClose={this.handleClose} /> : null}
-        {favComponent ? <FavoriteList onRemove={this.removeFavDrink} user={user} /> : null}
         <Footer />
       </React.Fragment>
     );
@@ -130,3 +128,4 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+//
