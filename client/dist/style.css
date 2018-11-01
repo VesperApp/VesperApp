@@ -190,6 +190,8 @@ table tr {
   background-color: rgba(0, 0, 0, 0.3);
   height: auto;
   border-radius: 5px;
+  width: 60%;
+  margin: 0 auto;
 }
 .ingredientLists .item {
   position: relative;
@@ -197,9 +199,10 @@ table tr {
   color: #999;
   height: 40px;
   line-height: 40px;
-  margin: 10px;
+  margin: 10px auto;
   padding-left: 10px;
   border-radius: 5px;
+  width: 80%;
 }
 .ingredientLists .ingredientTitle {
   font-size: 30px;
@@ -208,10 +211,8 @@ table tr {
   padding-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: 'Seaweed Script', cursive;
   text-align: center;
   color: white;
-  text-shadow: 3px 3px 3px rgb(14, 39, 43);
 }
 
 .ingredientLists [type='submit'] {
