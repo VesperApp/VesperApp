@@ -120,6 +120,9 @@ class Search extends React.Component {
       background: '#eee',
       lineHeight: '40px',
       borderRadius: '6px',
+      paddingLeft: '10px',
+      marginLeft: '5px',
+      zIndex: '3',
     };
     return (
       <div className="search">
@@ -127,7 +130,7 @@ class Search extends React.Component {
           <div className="title">What drink ingredients do you have?</div>
           <Autocomplete
             inputProps={{ className: 'searchInput' }}
-            wrapperStyle={wrapperStyle}
+            // wrapperStyle={wrapperStyle}
             getItemValue={item => item.label}
             items={this.convertIntoArray(validIngredients)}
             renderItem={(item, isHighlighted) => (

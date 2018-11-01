@@ -1,10 +1,16 @@
 body {
   background: #fff;
-  background-image: url('https://png.pngtree.com/thumb_back/fh260/back_pic/03/93/13/8157e504b9eb833.jpg');
+  background-image: url('https://wallpapersite.com/images/pages/pic_w/6500.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
+  height: 1200px; /* relative size dosn't work. I don't know why. -Henry */
+}
+
+#background {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
 }
 
 .listView {
@@ -166,25 +172,27 @@ table tr {
 }
 
 .search .title {
-  font-family: 'Seaweed Script', cursive;
+  /* font-family: 'Montserrat'; */
+  width: 100%;
   text-align: center;
   position: relative;
   font-size: 50px;
   margin: auto;
+  margin-top: 20px;
+  padding-top: 20px;
   font-weight: bold;
-  color: silver;
-  text-shadow: 3px 3px 3px rgb(14, 39, 43);
+  color: white;
+  /* text-shadow: 3px 3px 3px rgb(14, 39, 43); */
 }
 
 .ingredientLists {
-  margin: auto;
-  width: fit-content;
-  color: #336699;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
   height: auto;
-  background: green;
+  border-radius: 5px;
 }
-
 .ingredientLists .item {
+  position: relative;
   background: #fff;
   color: #999;
   height: 40px;
@@ -237,7 +245,6 @@ table tr {
   box-shadow: 0px 0px 2px #333;
   color: #fff;
 }
-
 .putRigth {
   width: 30px;
   height: 30px;
@@ -245,13 +252,11 @@ table tr {
   /* z-index: 3; */
   position: relative;
 }
-
 .putRigth:hover {
   cursor: pointer;
   color: red;
   text-shadow: 0px 0px 1px red;
 }
-
 .close {
   width: 30px;
   height: 30px;
@@ -325,7 +330,6 @@ table tr {
 body {
   margin: 0;
 }
-
 .background {
   width: 100%;
   height: 100%;
@@ -358,14 +362,14 @@ body {
 
 .header .appName {
   font-family: 'Seaweed Script', cursive;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   /* border: 1px solid red; */
   position: absolute;
-  margin-left: 5%;
-  margin-top: 18px;
-  color: green;
-  text-shadow: 4px 4px 4px rgb(201, 201, 0);
+  padding-left: 42%;
+  color: yellow;
+  width: 100%;
+  margin: 0;
 }
 .favorite {
   background: green;
@@ -419,23 +423,17 @@ body {
   line-height: -100%;
   text-align: center;
   opacity: 0.8;
-  padding-bottom: 3px;
   font-size: 18px;
-}
-.searchView {
-  align-items: center;
-  align-content: center;
-  text-align: center;
 }
 
 .searchInput {
   display: inline-block;
-  width: fit-content;
+  width: 88%;
   border: none;
   height: 40px;
   background: #eee;
   line-height: 40px;
-  margin: auto;
-  border-radius: 6px;
-  align-content: left;
+  padding-left: 10px;
+  margin-left: 5px;
+  z-index: 3;
 }

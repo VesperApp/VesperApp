@@ -121,7 +121,8 @@ class App extends React.Component {
         <Header />
         {search ? SearchComponent : ''}
         {resultList ? <ResultsList drinks={drinks} onClose={this.handleClose} /> : null}
-        <Footer />
+        {favComponent ? <FavoriteList onRemove={this.removeFavDrink} user={user} /> : null}
+        {/* <Footer /> */}
       </React.Fragment>
     );
   }
