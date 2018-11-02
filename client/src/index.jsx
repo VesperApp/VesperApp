@@ -64,7 +64,7 @@ class App extends React.Component {
       return obj;
     }, {});
 
-    console.log('!!!! ', postData);
+    // console.log('!!!! ', postData);
 
     axios
       .post('/drinksByIngredient', postData)
