@@ -35,7 +35,7 @@ class Search extends React.Component {
     const { listIngredients, searchInput } = this.state;
     const { validIngredients } = this.props;
     const upperedSerchInput = searchInput.trim().toUpperCase();
-    console.log('VALIIIID', validIngredients);
+    // console.log('VALIIIID', validIngredients);
     // using loop because we need to turn keys into uppercase
     let isValid = false;
     let addedIngre = null;
