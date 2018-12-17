@@ -433,7 +433,9 @@ body {
   height: 40px;
   background: #eee;
   line-height: 40px;
-  padding-left: 10px;
-  margin-left: 5px;
   z-index: 3;
+}
+
+*:focus {
+  outline: none;
 }
